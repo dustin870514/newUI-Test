@@ -12,6 +12,51 @@
 
 @implementation NPHttps_NetworkingTool
 
++(void)downloadTilesWithRequest:(NSURLRequest *)request andDestinationPath:(NSURL *)destinationPath andCompletionHandler:(void(^)(NSString *))completionHandler{
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    AFURLSessionManager *urlSessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *downloadTask = [urlSessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        if (httpResponse.statusCode == 404) return nil;
+        
+        return destinationPath;
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        if (completionHandler) {
+            
+            completionHandler(filePath.path);
+        }
+    }];
+    
+    [downloadTask resume];
+}
+
++(void)downloadTilesWithRequest:(NSURLRequest *)request resultClass:(Class)resultClass andDestinationPath:(NSURL *)destinationPath andCompletionHandler:(void (^)(id))completionHandler{
+    
+    [self downloadTilesWithRequest:request andDestinationPath:destinationPath andCompletionHandler:^(NSString *filePath) {
+        
+        if (completionHandler) {
+            
+            NSData *data = [NSData dataWithContentsOfFile:filePath];
+            
+            NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            id result = [resultClass mj_objectArrayWithKeyValuesArray:tempArray];
+            
+            completionHandler(result);
+        }
+    }];
+}
+
+
+
+
 +(void)get:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure{
 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
