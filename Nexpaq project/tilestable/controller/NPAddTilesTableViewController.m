@@ -191,10 +191,10 @@
     
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     
-    [userInfo setObject:[NSString stringWithFormat:@"%lx",moduleTile.id] forKey:@"MODULE_ID"];
+    [userInfo setObject:@(moduleTile.id) forKey:@"MODULE_ID"];
     
-    [userInfo setObject:[NSString stringWithFormat:@"%lx",moduleTile.template] forKey:@"MODULE_TEMPLATE"];
-
+    [userInfo setObject:@(moduleTile.template) forKey:@"MODULE_TEMPLATE"];
+    
     [self.notificationCenter postNotificationName:MODULETILE_NOTIFY_DIDSELECTED object:nil userInfo:userInfo];
     
 //    [self.navigationController popViewControllerAnimated:YES];
