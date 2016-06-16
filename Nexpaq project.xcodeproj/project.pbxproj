@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17FB6D7F1D124844009B2482 /* NPMetroContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */; };
+		17FB6D801D124844009B2482 /* NPMetroSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7E1D124844009B2482 /* NPMetroSubView.m */; };
+		17FB6D831D1248C8009B2482 /* NPTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D821D1248C8009B2482 /* NPTileView.m */; };
+		17FB6D901D124902009B2482 /* NPTileTextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D8F1D124902009B2482 /* NPTileTextAttribute.m */; };
+		17FB6D931D124909009B2482 /* NPTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D921D124909009B2482 /* NPTile.m */; };
 		B53BC4F11D1124C400AA25A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC4F01D1124C400AA25A9 /* main.m */; };
 		B53BC4F41D1124C400AA25A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC4F31D1124C400AA25A9 /* AppDelegate.m */; };
 		B53BC4FC1D1124C400AA25A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53BC4FB1D1124C400AA25A9 /* Assets.xcassets */; };
@@ -53,8 +58,6 @@
 		B53BC5B01D112C2A00AA25A9 /* NPCalcStringUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5A41D112C2A00AA25A9 /* NPCalcStringUtility.m */; };
 		B53BC5B71D112C7E00AA25A9 /* NPFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5B41D112C7E00AA25A9 /* NPFileManager.m */; };
 		B53BC5BA1D11335800AA25A9 /* NPShowGateWayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5B91D11335800AA25A9 /* NPShowGateWayView.m */; };
-		B53BC5C01D1145B400AA25A9 /* NPMetroContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5BD1D1145B400AA25A9 /* NPMetroContainerView.m */; };
-		B53BC5C11D1145B400AA25A9 /* NPMetroSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5BF1D1145B400AA25A9 /* NPMetroSubView.m */; };
 		B53BC5D01D114D7800AA25A9 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5C41D114D7800AA25A9 /* AFHTTPSessionManager.m */; };
 		B53BC5D11D114D7800AA25A9 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5C71D114D7800AA25A9 /* AFNetworkReachabilityManager.m */; };
 		B53BC5D21D114D7800AA25A9 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC5C91D114D7800AA25A9 /* AFSecurityPolicy.m */; };
@@ -112,6 +115,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17FB6D7B1D124844009B2482 /* NPMetroContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroContainerView.h; sourceTree = "<group>"; };
+		17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroContainerView.m; sourceTree = "<group>"; };
+		17FB6D7D1D124844009B2482 /* NPMetroSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroSubView.h; sourceTree = "<group>"; };
+		17FB6D7E1D124844009B2482 /* NPMetroSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroSubView.m; sourceTree = "<group>"; };
+		17FB6D811D1248C8009B2482 /* NPTileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTileView.h; sourceTree = "<group>"; };
+		17FB6D821D1248C8009B2482 /* NPTileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTileView.m; sourceTree = "<group>"; };
+		17FB6D8E1D124902009B2482 /* NPTileTextAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTileTextAttribute.h; sourceTree = "<group>"; };
+		17FB6D8F1D124902009B2482 /* NPTileTextAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTileTextAttribute.m; sourceTree = "<group>"; };
+		17FB6D911D124909009B2482 /* NPTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTile.h; sourceTree = "<group>"; };
+		17FB6D921D124909009B2482 /* NPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTile.m; sourceTree = "<group>"; };
+		17FB6D941D1276A0009B2482 /* NPEnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NPEnumHeader.h; sourceTree = "<group>"; };
 		B53BC4EC1D1124C400AA25A9 /* Nexpaq project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nexpaq project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53BC4F01D1124C400AA25A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B53BC4F21D1124C400AA25A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -207,10 +221,6 @@
 		B53BC5B61D112C7E00AA25A9 /* Ulitlity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ulitlity.h; sourceTree = "<group>"; };
 		B53BC5B81D11335800AA25A9 /* NPShowGateWayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPShowGateWayView.h; sourceTree = "<group>"; };
 		B53BC5B91D11335800AA25A9 /* NPShowGateWayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPShowGateWayView.m; sourceTree = "<group>"; };
-		B53BC5BC1D1145B400AA25A9 /* NPMetroContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroContainerView.h; sourceTree = "<group>"; };
-		B53BC5BD1D1145B400AA25A9 /* NPMetroContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroContainerView.m; sourceTree = "<group>"; };
-		B53BC5BE1D1145B400AA25A9 /* NPMetroSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroSubView.h; sourceTree = "<group>"; };
-		B53BC5BF1D1145B400AA25A9 /* NPMetroSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroSubView.m; sourceTree = "<group>"; };
 		B53BC5C31D114D7800AA25A9 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		B53BC5C41D114D7800AA25A9 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		B53BC5C51D114D7800AA25A9 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -314,6 +324,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17FB6D8D1D1248F5009B2482 /* TileModel */ = {
+			isa = PBXGroup;
+			children = (
+				17FB6D941D1276A0009B2482 /* NPEnumHeader.h */,
+				17FB6D911D124909009B2482 /* NPTile.h */,
+				17FB6D921D124909009B2482 /* NPTile.m */,
+				17FB6D8E1D124902009B2482 /* NPTileTextAttribute.h */,
+				17FB6D8F1D124902009B2482 /* NPTileTextAttribute.m */,
+			);
+			name = TileModel;
+			sourceTree = "<group>";
+		};
 		B53BC4E31D1124C400AA25A9 = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +433,7 @@
 		B53BC5291D11256F00AA25A9 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				17FB6D8D1D1248F5009B2482 /* TileModel */,
 				B53BC5BB1D1145B400AA25A9 /* metro */,
 			);
 			path = view;
@@ -622,10 +645,12 @@
 		B53BC5BB1D1145B400AA25A9 /* metro */ = {
 			isa = PBXGroup;
 			children = (
-				B53BC5BC1D1145B400AA25A9 /* NPMetroContainerView.h */,
-				B53BC5BD1D1145B400AA25A9 /* NPMetroContainerView.m */,
-				B53BC5BE1D1145B400AA25A9 /* NPMetroSubView.h */,
-				B53BC5BF1D1145B400AA25A9 /* NPMetroSubView.m */,
+				17FB6D811D1248C8009B2482 /* NPTileView.h */,
+				17FB6D821D1248C8009B2482 /* NPTileView.m */,
+				17FB6D7B1D124844009B2482 /* NPMetroContainerView.h */,
+				17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */,
+				17FB6D7D1D124844009B2482 /* NPMetroSubView.h */,
+				17FB6D7E1D124844009B2482 /* NPMetroSubView.m */,
 			);
 			path = metro;
 			sourceTree = "<group>";
@@ -787,7 +812,7 @@
 				TargetAttributes = {
 					B53BC4EB1D1124C400AA25A9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = P9SU983939;
+						DevelopmentTeam = THPFNYW7A3;
 					};
 					B53BC5041D1124C400AA25A9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -858,12 +883,15 @@
 				B53BC5F21D11511000AA25A9 /* MJFoundation.m in Sources */,
 				B53BC5A61D112C2A00AA25A9 /* NPBLE_Parse.m in Sources */,
 				B53BC61E1D11531E00AA25A9 /* NSData+ImageContentType.m in Sources */,
+				17FB6D801D124844009B2482 /* NPMetroSubView.m in Sources */,
 				B53BC5581D11286700AA25A9 /* UIView+Extension.m in Sources */,
 				B53BC5551D11286700AA25A9 /* NSString+ToData.m in Sources */,
 				B53BC5561D11286700AA25A9 /* UIBarButtonItem+extention.m in Sources */,
 				B53BC62B1D11531E00AA25A9 /* UIImageView+WebCache.m in Sources */,
 				B53BC5F91D11511000AA25A9 /* NSObject+MJProperty.m in Sources */,
 				B53BC5A51D112C2A00AA25A9 /* NPBLE_Control.m in Sources */,
+				17FB6D831D1248C8009B2482 /* NPTileView.m in Sources */,
+				17FB6D931D124909009B2482 /* NPTile.m in Sources */,
 				B53BC5731D1128A300AA25A9 /* NPTouchMovedView.m in Sources */,
 				B53BC52A1D11256F00AA25A9 /* NPNavigationController.m in Sources */,
 				B53BC5571D11286700AA25A9 /* UIImage+Not_stretch.m in Sources */,
@@ -878,13 +906,13 @@
 				B53BC6201D11531E00AA25A9 /* SDWebImageCompat.m in Sources */,
 				B53BC5BA1D11335800AA25A9 /* NPShowGateWayView.m in Sources */,
 				B53BC5AD1D112C2A00AA25A9 /* NPBLE_Module.m in Sources */,
+				17FB6D901D124902009B2482 /* NPTileTextAttribute.m in Sources */,
 				B53BC6321D1156C500AA25A9 /* NPTilesModulesResults.m in Sources */,
 				B53BC5A81D112C2A00AA25A9 /* NPBLE_CommandMannager.m in Sources */,
 				B53BC5D11D114D7800AA25A9 /* AFNetworkReachabilityManager.m in Sources */,
 				B53BC57F1D112A1E00AA25A9 /* NPPopTileTypeMenu.m in Sources */,
 				B53BC61D1D11531E00AA25A9 /* MKAnnotationView+WebCache.m in Sources */,
 				B53BC54F1D11286700AA25A9 /* NSData+CRC.m in Sources */,
-				B53BC5C11D1145B400AA25A9 /* NPMetroSubView.m in Sources */,
 				B53BC5F71D11511000AA25A9 /* NSObject+MJCoding.m in Sources */,
 				B53BC5701D1128A300AA25A9 /* NPActiveMoudolesView.m in Sources */,
 				B53BC5801D112A1E00AA25A9 /* NPTilesTableViewCell.m in Sources */,
@@ -905,6 +933,7 @@
 				B53BC5791D11290700AA25A9 /* NPConnectedModuals.m in Sources */,
 				B53BC5AE1D112C2A00AA25A9 /* NPBLE_Module_Info.m in Sources */,
 				B53BC54E1D11286700AA25A9 /* NSArray+newArray.m in Sources */,
+				17FB6D7F1D124844009B2482 /* NPMetroContainerView.m in Sources */,
 				B53BC6261D11531E00AA25A9 /* UIButton+WebCache.m in Sources */,
 				B53BC6291D11531E00AA25A9 /* UIImage+WebP.m in Sources */,
 				B53BC5D41D114D7800AA25A9 /* AFURLResponseSerialization.m in Sources */,
@@ -925,7 +954,6 @@
 				B53BC52B1D11256F00AA25A9 /* NPRootViewController.m in Sources */,
 				B53BC5541D11286700AA25A9 /* NSString+stringToHexString.m in Sources */,
 				B53BC62F1D11557600AA25A9 /* NPTilesModules.m in Sources */,
-				B53BC5C01D1145B400AA25A9 /* NPMetroContainerView.m in Sources */,
 				B53BC5F31D11511000AA25A9 /* MJProperty.m in Sources */,
 				B53BC5521D11286700AA25A9 /* NSString+cut_String.m in Sources */,
 				B53BC57A1D11290700AA25A9 /* NPShowConnectedModual.m in Sources */,
@@ -1064,10 +1092,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nexpaq.com.cn.Nexpaq-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1076,10 +1107,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nexpaq.com.cn.Nexpaq-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

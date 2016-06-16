@@ -33,6 +33,8 @@
         
         self.label.text = [NSString stringWithFormat:@"%zd",self.position];
         
+        self.backgroundColor = [UIColor redColor];
+        
         [self setUpGestureRecognizer];
     }
   
@@ -42,6 +44,11 @@
 + (instancetype)metroSubViewWithType:(NSInteger)type andPosition:(NSInteger)position{
 
     return [[self alloc] initWithType:type andPosition:position];
+}
+
++ (instancetype)metroSubViewWithType:(NSInteger)type{
+
+    return  [[self alloc] initWithType:type andPosition:-1];
 }
 
 
@@ -79,6 +86,8 @@
     self.oldPosition = self.position;
     
     [self.superview bringSubviewToFront:self];
+    
+    self.touchBeganBlock();
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

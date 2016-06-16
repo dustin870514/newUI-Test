@@ -28,15 +28,17 @@
 
 //所有子view
 @property (nonatomic, strong) NSMutableArray *subViews;
-
+//当前激活的view
 @property (nonatomic, strong) NPMetroSubView *activeView;
+//按子view位子大小排列的数组
+@property (nonatomic, strong) NSMutableArray *asortPositons;
 
 //监听子view的移动事件
 @property (nonatomic, copy) void (^movingBlock)(NPMetroSubView *);
 //监听子view的松手事件
 @property (nonatomic, copy) void (^movingEndedBlock)(NPMetroSubView *);
-
-
+//监听点击事件
+@property (nonatomic, copy) void (^touchBeganBlock)();
 
 @end
 
@@ -53,6 +55,8 @@
         self.smallMagrin = smallMagrin;
         
         self.topMagrin = topMagrin;
+        
+        self.showsVerticalScrollIndicator = NO;
         
         [self monitorSubViewsMovingEvent];
     }
@@ -82,9 +86,12 @@
 
 - (void)containerViewIncludeSubView:(NPMetroSubView *)subView{
 
+    [self addSubview:subView];
+    
     [self.subViews addObject:subView];
     
-    [self addSubview:subView];
+    [self setUpContentSize];
+    
 }
 
 - (void)containerViewIncludeSubViews:(NSArray *)subViews{
@@ -94,6 +101,41 @@
         [self containerViewIncludeSubView:subView];
     }
 }
+
+- (void)setUpContentSize{
+    
+    self.asortPositons = [NSMutableArray arrayWithArray:self.subViews];
+
+    for (int i = 0; i < self.asortPositons.count; ++i) {
+        
+        for (int j = i + 1; j < self.asortPositons.count; ++j) {
+            
+            NPMetroSubView *subView_0 = self.asortPositons[i];
+            
+            NPMetroSubView *subView_1 = self.asortPositons[j];
+            
+            if (subView_0.positions.lastObject > subView_1.positions.lastObject) {
+                
+                [self.asortPositons replaceObjectAtIndex:i withObject:subView_1];
+                
+                [self .asortPositons replaceObjectAtIndex:j withObject:subView_0];
+            }
+        }
+    }
+    
+    NPMetroSubView *lastView = self.asortPositons.lastObject;
+    
+    CGFloat contentHeight = CGRectGetMaxY(lastView.frame) + self.topMagrin;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+         self.contentSize = CGSizeMake(self.superview.frame.size.width, contentHeight);
+    }];
+}
+
+
+
+
 //监听子view移动事件
 - (void)monitorSubViewsMovingEvent{
     
@@ -147,6 +189,15 @@
         
         [weakSelf actionGravityWithActiveView:view];
         
+        [weakSelf setUpContentSize];
+        
+        weakSelf.scrollEnabled = YES;
+    
+    };
+    
+    self.touchBeganBlock = ^{
+    
+        weakSelf.scrollEnabled = NO;
     };
 }
 
@@ -529,12 +580,48 @@
         
         NPMetroSubView *metroView = (NPMetroSubView *)view;
         
+        if (metroView.position == -1) {
+            
+            NPMetroSubView *lastView = self.asortPositons.lastObject;
+            
+            if (lastView == nil) {
+                
+                metroView.position = 0;
+            
+            }else{
+              
+                NSInteger lastPosition = [lastView.positions.lastObject integerValue];
+                
+                if ((5 - lastPosition % 6) >= metroView.type * 2 ) {
+                    
+                    metroView.position = lastPosition + 1;
+                    
+                }else{
+                    
+                    metroView.position = (lastPosition / 6 + 1) * 6;
+                }
+            }
+        }
+        
+        NSInteger unitDistance = [self actionGravityDistaceWithGravityView:metroView];
+        
+        metroView.position -= 6 * unitDistance;
+        
         [self subViewFrameWithView:metroView];
         
         metroView.movingEndedBlock = self.movingEndedBlock;
         
         metroView.movingBlock = self.movingBlock;
+        
+        metroView.touchBeganBlock = self.touchBeganBlock;
     }
+}
+
+- (void)layoutSubviews{
+
+    [super layoutSubviews];
+    
+    [self setUpContentSize];
 }
 
 #pragma mark - other Method
@@ -542,20 +629,33 @@
 - (void)subViewFrameWithView:(NPMetroSubView *)view{
     
     NSInteger hor = view.position % 6;
+    
     NSInteger ver = view.position / 6;
+    
+    CGFloat x = self.lagreMagrin + (self.lagreMagrin + self.unitWidth) * hor;
+    
+    CGFloat y = self.topMagrin + (self.lagreMagrin + self.unitHeight) * ver;
+    
+    CGFloat widthType_zero = self.unitWidth;
+    
+    CGFloat heightType_zero = self.unitHeight;
+    
+    CGFloat width = self.unitHorWidth * view.type * 2 + self.lagreMagrin * (view.type - 1);
+   
+    CGFloat height = self.unitVorWidth* 2;
+    
+    view.margin = self.lagreMagrin;
 
     switch (view.type) {
         case 0:
-            view.x = self.lagreMagrin + (self.lagreMagrin + self.unitWidth) * hor;
-            view.y = self.topMagrin + (self.lagreMagrin + self.unitHeight) * ver;
-            view.width = self.unitWidth;
-            view.height = self.unitHeight;
+            
+            view.frame = CGRectMake(x, y, widthType_zero, heightType_zero);
+            
             break;
         default:
-            view.x = self.lagreMagrin + (self.lagreMagrin + self.unitWidth) * hor;
-            view.y = self.topMagrin + (self.lagreMagrin + self.unitHeight) * ver;
-            view.width = self.unitHorWidth * view.type * 2 + self.lagreMagrin * (view.type - 1);
-            view.height = self.unitVorWidth* 2;
+            
+            view.frame = CGRectMake(x, y, width, height);
+           
             break;
     }
 }
@@ -571,5 +671,6 @@
 
     return _subViews;
 }
+
 
 @end
