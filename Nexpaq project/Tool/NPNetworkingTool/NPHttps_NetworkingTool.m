@@ -15,6 +15,8 @@
 +(void)get:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure{
 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    
+    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html", nil];
 
     [sessionManager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         

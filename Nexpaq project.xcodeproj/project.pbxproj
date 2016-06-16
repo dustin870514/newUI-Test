@@ -94,6 +94,7 @@
 		B53BC62C1D11531E00AA25A9 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC61C1D11531E00AA25A9 /* UIView+WebCacheOperation.m */; };
 		B53BC62F1D11557600AA25A9 /* NPTilesModules.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC62E1D11557600AA25A9 /* NPTilesModules.m */; };
 		B53BC6321D1156C500AA25A9 /* NPTilesModulesResults.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC6311D1156C500AA25A9 /* NPTilesModulesResults.m */; };
+		B582D0C61D124B59000704B0 /* NPHttps_Networking_ForTiles.m in Sources */ = {isa = PBXBuildFile; fileRef = B582D0C51D124B59000704B0 /* NPHttps_Networking_ForTiles.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,6 +295,8 @@
 		B53BC62E1D11557600AA25A9 /* NPTilesModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTilesModules.m; sourceTree = "<group>"; };
 		B53BC6301D1156C500AA25A9 /* NPTilesModulesResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTilesModulesResults.h; sourceTree = "<group>"; };
 		B53BC6311D1156C500AA25A9 /* NPTilesModulesResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTilesModulesResults.m; sourceTree = "<group>"; };
+		B582D0C41D124B59000704B0 /* NPHttps_Networking_ForTiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NPHttps_Networking_ForTiles.h; path = ../AFNetworking/NPHttps_Networking_ForTiles.h; sourceTree = "<group>"; };
+		B582D0C51D124B59000704B0 /* NPHttps_Networking_ForTiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NPHttps_Networking_ForTiles.m; path = ../AFNetworking/NPHttps_Networking_ForTiles.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -631,6 +634,8 @@
 			isa = PBXGroup;
 			children = (
 				B53BC5C21D114D7800AA25A9 /* AFNetworking */,
+				B582D0C41D124B59000704B0 /* NPHttps_Networking_ForTiles.h */,
+				B582D0C51D124B59000704B0 /* NPHttps_Networking_ForTiles.m */,
 				B53BC5D61D114E3700AA25A9 /* NPHttps_NetworkingTool.h */,
 				B53BC5D71D114E3700AA25A9 /* NPHttps_NetworkingTool.m */,
 			);
@@ -913,6 +918,7 @@
 				B53BC5801D112A1E00AA25A9 /* NPTilesTableViewCell.m in Sources */,
 				B53BC4F41D1124C400AA25A9 /* AppDelegate.m in Sources */,
 				B53BC5AA1D112C2A00AA25A9 /* NPBLE_Device.m in Sources */,
+				B582D0C61D124B59000704B0 /* NPHttps_Networking_ForTiles.m in Sources */,
 				B53BC5831D112A2500AA25A9 /* NPAddTilesTableViewController.m in Sources */,
 				B53BC5D51D114D7800AA25A9 /* AFURLSessionManager.m in Sources */,
 				B53BC5A71D112C2A00AA25A9 /* NPBLE_ParseManager.m in Sources */,

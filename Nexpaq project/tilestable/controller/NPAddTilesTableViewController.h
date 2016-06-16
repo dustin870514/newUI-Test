@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+//which cell for tile did selected noti
+#define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
+
 @interface NPAddTilesTableViewController : UITableViewController
 
 @end
