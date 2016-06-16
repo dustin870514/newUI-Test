@@ -17,6 +17,8 @@
 #import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
 
+#define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
+
 // 颜色
 #define NPColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
@@ -33,39 +35,11 @@
 
 @property(nonatomic, strong) NSMutableArray *tilesModulesArray;
 
+@property (nonatomic, strong) NSNotificationCenter *notifyCenter;
+
 @end
 
 @implementation NPRootViewController
-
--(NSMutableArray *)tilesModulesArray{
-
-    if (_tilesModulesArray == nil) {
-        
-        self.tilesModulesArray = [NSMutableArray array];
-    }
-    
-    return _tilesModulesArray;
-}
-
--(NSNotificationCenter *)notificationCenter{
-
-    if (_notificationCenter == nil) {
-        
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
-    }
-    
-    return _notificationCenter;
-}
-
--(NPMetroContainerView *)metroContainerView{
-    
-    if (_metroContainerView == nil) {
-        
-        self.metroContainerView = [NPMetroContainerView containerViewWithLagreMagrin:5 andSmallMagrin:5 andTopMagrin:5];
-    }
-    
-    return _metroContainerView;
-}
 
 
 - (void)viewDidLoad {
@@ -73,6 +47,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.notifyCenter addObserver:self selector:@selector(addTile:) name:MODULETILE_NOTIFY_DIDSELECTED object:nil];
     
     [self setUpNavigationItem];
     
@@ -182,6 +158,58 @@
 -(void)back{
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)addTile:(NSNotification *)note{
+
+    NSInteger ID = [note.userInfo[@"MODULE_ID"] integerValue];
+    
+    NSInteger tileTemplate = [note.userInfo[@"MODULE_TEMPLATE"] integerValue];
+    
+    NSLog(@"ID = %zd tem = %zd",ID,tileTemplate);
+
+}
+
+#pragma mark - setter && getter
+
+-(NSMutableArray *)tilesModulesArray{
+    
+    if (_tilesModulesArray == nil) {
+        
+        self.tilesModulesArray = [NSMutableArray array];
+    }
+    
+    return _tilesModulesArray;
+}
+
+-(NSNotificationCenter *)notificationCenter{
+    
+    if (_notificationCenter == nil) {
+        
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
+    }
+    
+    return _notificationCenter;
+}
+
+-(NPMetroContainerView *)metroContainerView{
+    
+    if (_metroContainerView == nil) {
+        
+        self.metroContainerView = [NPMetroContainerView containerViewWithLagreMagrin:5 andSmallMagrin:5 andTopMagrin:5];
+    }
+    
+    return _metroContainerView;
+}
+
+- (NSNotificationCenter *)notifyCenter{
+
+    if (_notifyCenter == nil) {
+        
+        _notifyCenter = [NSNotificationCenter defaultCenter];
+    }
+  
+    return _notifyCenter;
 }
 
 @end
