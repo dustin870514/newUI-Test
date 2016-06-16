@@ -22,9 +22,21 @@
 
 @property(nonatomic, strong) NSMutableArray *tilesModulesArray;
 
+@property(nonatomic, strong) NSNotificationCenter *notificationCenter;
+
 @end
 
 @implementation NPAddTilesTableViewController
+
+-(NSNotificationCenter *)notificationCenter{
+    
+    if (_notificationCenter == nil) {
+        
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
+    }
+    
+    return _notificationCenter;
+}
 
 - (void)viewDidLoad {
     
@@ -147,9 +159,7 @@
 
 -(void)showAlertView:(NSString *)message{
 
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"which tile is selected" message:message delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
     
-    [alertView show];
 }
 
 #pragma mark - Table view data source
@@ -176,9 +186,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
     
-    [self.navigationController popViewControllerAnimated:YES];
+    NPTilesModules *moduleTile = self.tilesModulesArray[indexPath.row];
+    
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    
+    [userInfo setObject:[NSString stringWithFormat:@"%lx",moduleTile.id] forKey:@"MODULE_ID"];
+    
+    [userInfo setObject:[NSString stringWithFormat:@"%lx",moduleTile.template] forKey:@"MODULE_TEMPLATE"];
+
+    [self.notificationCenter postNotificationName:MODULETILE_NOTIFY_DIDSELECTED object:nil userInfo:userInfo];
+    
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
