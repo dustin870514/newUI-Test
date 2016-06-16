@@ -21,6 +21,8 @@ typedef enum {
 
 @interface NPMetroSubView : UIView
 
+@property (nonatomic, copy) void (^touchBeganBlock)();
+
 //监听view的移动事件
 @property (nonatomic, copy) void (^movingBlock)(NPMetroSubView *);
 //监听view的松手事件
@@ -40,9 +42,11 @@ typedef enum {
 
 @property (nonatomic, assign) NSInteger ID;
 
+@property (nonatomic, assign) CGFloat margin;
+
 
 + (instancetype)metroSubViewWithType:(NSInteger)type andPosition:(NSInteger)position;
 
-
++ (instancetype)metroSubViewWithType:(NSInteger)type;
 
 @end
