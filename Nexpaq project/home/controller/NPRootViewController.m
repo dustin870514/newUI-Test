@@ -13,6 +13,9 @@
 #import "UIView+Extension.h"
 #import "NPAddTilesTableViewController.h"
 #import "UIBarButtonItem+extention.h"
+#import "NPHttps_Networking_ForTiles.h"
+#import "NPTilesModulesResults.h"
+#import "NPTilesModules.h"
 
 // 颜色
 #define NPColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
@@ -28,9 +31,21 @@
 
 @property (nonatomic, strong) NPMetroContainerView *metroContainerView;
 
+@property(nonatomic, strong) NSMutableArray *tilesModulesArray;
+
 @end
 
 @implementation NPRootViewController
+
+-(NSMutableArray *)tilesModulesArray{
+
+    if (_tilesModulesArray == nil) {
+        
+        self.tilesModulesArray = [NSMutableArray array];
+    }
+    
+    return _tilesModulesArray;
+}
 
 -(NSNotificationCenter *)notificationCenter{
 
@@ -139,6 +154,22 @@
 }
 
 -(void)clickRightBarButtonItem{
+    
+//    [NPHttps_Networking_ForTiles downloadTileWithParams:nil succsess:^(NPTilesModulesResults *result) {
+//        
+////        self.tilesModulesArray = result.modulesArray;
+//        
+//        for (NPTilesModules *tempTileModule in result.modulesArray) {
+//            
+//            NPTilesModules *tileModule = tempTileModule;
+//            
+//            [self.tilesModulesArray addObject:tileModule];
+//        }
+//        
+//    } failure:^(NSError *error) {
+//        
+//        
+//    }];
     
     NPAddTilesTableViewController *addTilesTableViewController = [[NPAddTilesTableViewController alloc] init];
     

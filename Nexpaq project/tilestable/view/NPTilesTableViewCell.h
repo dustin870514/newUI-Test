@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NPTilesModules.h"
 
 @interface NPTilesTableViewCell : UITableViewCell
 
+@property(nonatomic, strong)NPTilesModules *modules;
+
 +(instancetype)cellWithTableView:(UITableView *)tableView;
+
 
 @end

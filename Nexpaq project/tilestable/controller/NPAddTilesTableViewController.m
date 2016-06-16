@@ -10,8 +10,17 @@
 #import "NPTilesTableViewCell.h"
 #import "UIView+Extension.h"
 #import "NPPopTileTypeMenu.h"
+#import "NPHttps_Networking_ForTiles.h"
+#import "NPTilesModulesResults.h"
+#import "AFNetworking.h"
+#import "NPTilesModules.h"
+#import "MJExtension.h"
 
 @interface NPAddTilesTableViewController ()<NPPopTileTypeMenuDelegate>
+
+@property(nonatomic, strong) NSMutableArray *modulesArray;
+
+@property(nonatomic, strong) NSMutableArray *tilesModulesArray;
 
 @end
 
@@ -20,6 +29,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self downloadTileModules];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
@@ -33,6 +44,41 @@
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 5)];
     
+}
+
+-(void)downloadTileModules{
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSString *url = @"http://vpn2.coody.top/nexpaq-app-beta-resources/tiles/tiles.txt";
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",url]]];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+        
+    }completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        
+        NSLog(@"filePath = %@",filePath.path);
+        
+        NSData *data = [NSData dataWithContentsOfFile:filePath.path];
+        
+        self.modulesArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        self.tilesModulesArray = [NPTilesModules mj_objectArrayWithKeyValuesArray:self.modulesArray];
+        
+        NSLog(@"---------self.tilesModulesArray.count------%ld",self.tilesModulesArray.count);
+        
+        [self.tableView reloadData];
+    }];
+    
+    [downloadTask resume];
+
 }
 
 -(UIView *)navigationItemView{
@@ -110,7 +156,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 20;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -124,6 +170,7 @@
     NPTilesTableViewCell *cell = [NPTilesTableViewCell cellWithTableView:tableView];
     
     //通过传数据模型到NPTilesTableViewCell中设置imageView，titleLabel, descriptionLabel
+    cell.modules = self.tilesModulesArray[indexPath.row];
     
     return cell;
 }

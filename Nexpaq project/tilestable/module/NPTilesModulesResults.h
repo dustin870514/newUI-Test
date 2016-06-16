@@ -11,6 +11,6 @@
 @interface NPTilesModulesResults : NSObject
 
 /* this array is to save all NPTilesModules which download from net */
-@property(nonatomic, strong) NSArray *modulesArray;
+@property(nonatomic, strong) NSMutableArray *modulesArray;
 
 @end
