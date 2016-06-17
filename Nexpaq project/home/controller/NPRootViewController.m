@@ -134,7 +134,7 @@
     
    self.gateWayDidselected = note.userInfo[USER_GATEWAY_TYPE];
 
-    NSLog(@"------------gateWayDidselected----------%@----------",self.gateWayDidselected);
+//    NSLog(@"------------gateWayDidselected----------%@----------",self.gateWayDidselected);
     
     if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYQUEUE]) {
         
