@@ -8,10 +8,7 @@
 
 #import "NPShowGateWayView.h"
 #import "UIView+Extension.h"
-
-#define USERGATEWAYTYPE_BYQUEUE @"USERGATEWAYTYPE_BYQUEUE"
-#define USERGATEWAYTYPE_BYSINGLE @"USERGATEWAYTYPE_BYSINGLE"
-#define USERGATEWAYTYPE_BYDOUBLE @"USERGATEWAYTYPE_BYDOUBLE"
+#import "AppDelegate.h"
 
 @interface NPShowGateWayView()
 /*
@@ -25,18 +22,20 @@
 
 @property(nonatomic, strong)NSNotificationCenter *notificationCenter;
 
+@property(nonatomic, strong)AppDelegate *app;
+
 @end
 
 @implementation NPShowGateWayView
 
--(NSNotificationCenter *)notificationCenter{
-
-    if (_notificationCenter) {
+-(AppDelegate *)app{
+    
+    if (_app == nil) {
         
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
+        self.app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     }
     
-    return _notificationCenter;
+    return _app;
 }
 
 -(instancetype)initWithContentView:(UIView *)view{
@@ -119,34 +118,30 @@
 
 -(void)queueButtonClicked:(UIButton *)button{
     
-//    if ([self.delegate respondsToSelector:@selector(gateWayViewDismiss:buttonDidClickedByTag:)]) {
-//        
-//        [self.delegate gateWayViewDismiss:self buttonDidClickedByTag:UserGateWayTypebyQueue];
-//    }
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"UserGateWayTypebyQueue" forKey:@"UserGateWayTypebyQueue"];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYQUEUE forKey:USER_GATEWAY_TYPE];
     
-    [self.notificationCenter postNotificationName:@"UserGateWayTypebyQueue" object:nil userInfo:dict];
+    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
     
     [self dismiss];
     
 }
 -(void)singleButtonClicked:(UIButton *)button{
     
-//    if ([self.delegate respondsToSelector:@selector(gateWayViewDismiss:buttonDidClickedByTag:)]) {
-//        
-//        [self.delegate gateWayViewDismiss:self buttonDidClickedByTag:UserGateWayTypebySingle];
-//    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYSINGLE forKey:USER_GATEWAY_TYPE];
     
+    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
+    
+    [self dismiss];
 }
 
 -(void)doubleButtonClicked:(UIButton *)button{
     
-//    if ([self.delegate respondsToSelector:@selector(gateWayViewDismiss:buttonDidClickedByTag:)]) {
-//        
-//       [self.delegate gateWayViewDismiss:self buttonDidClickedByTag:UserGateWayTypebyDouble];
-//    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYDOUBLE forKey:USER_GATEWAY_TYPE];
     
+    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
+    
+    [self dismiss];
 }
 
 -(void)dismiss{

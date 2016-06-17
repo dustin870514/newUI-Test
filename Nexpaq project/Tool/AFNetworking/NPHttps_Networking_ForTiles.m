@@ -21,10 +21,15 @@
 
 @implementation NPHttps_Networking_ForTiles
 
++(void)downloadTileWithRequest:(NSURLRequest *)request andDestinationPath:(NSURL *)destinationPath completionHandler:(void (^)(id))completionHandler{
+    
+    [self downloadTilesWithRequest:request resultClass:[NPTilesModules class] andDestinationPath:destinationPath andCompletionHandler:completionHandler];
+}
+
 +(void)downloadTileWithParams:(id)params succsess:(void (^)(NPTilesModulesResults *))success failure:(void (^)(NSError *error))failure{
-
+    
     [self getWithUrl:@"http://vpn2.coody.top/nexpaq-app-beta-resources/tiles/" params:params resultClass:[NPTilesModulesResults class] success:success failure:failure];
-
+    
 }
 
 + (void)downloadTileResourceWithIdUrl:(NSString *)idUrl andId:(NSString *)Id andSuccess:(void (^)(NPTile *))success andFailure:(void (^)(NSError *erro))failure{

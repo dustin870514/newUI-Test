@@ -60,36 +60,20 @@
 
 -(void)downloadTileModules{
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
     NSString *url = @"http://vpn2.coody.top/nexpaq-app-beta-resources/tiles/tiles.txt";
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",url]]];
     
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    
+    NSURL *filePath = [documentsDirectoryURL URLByAppendingPathComponent:@"tiles.txt"];
+    
+    [NPHttps_Networking_ForTiles downloadTileWithRequest:request andDestinationPath:filePath completionHandler:^(NSMutableArray *result) {
         
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        
-        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
-        
-    }completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        
-        NSLog(@"filePath = %@",filePath.path);
-        
-        NSData *data = [NSData dataWithContentsOfFile:filePath.path];
-        
-        self.modulesArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        self.tilesModulesArray = [NPTilesModules mj_objectArrayWithKeyValuesArray:self.modulesArray];
-        
-        NSLog(@"---------self.tilesModulesArray.count------%ld",self.tilesModulesArray.count);
+        self.tilesModulesArray = result;
         
         [self.tableView reloadData];
     }];
-    
-    [downloadTask resume];
 
 }
 
@@ -194,6 +178,8 @@
     [userInfo setObject:@(moduleTile.id) forKey:@"MODULE_ID"];
     
     [userInfo setObject:@(moduleTile.template) forKey:@"MODULE_TEMPLATE"];
+    
+    NSLog(@"----%@-----%@---",@(moduleTile.id),@(moduleTile.template));
     
     [self.notificationCenter postNotificationName:MODULETILE_NOTIFY_DIDSELECTED object:nil userInfo:userInfo];
     

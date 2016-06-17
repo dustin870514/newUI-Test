@@ -36,6 +36,8 @@
     
     _dict = [NSMutableDictionary dictionary];
     _connectedViewIsShow = NO;
+    
+    _notificationCenter = [NSNotificationCenter defaultCenter];
    
     return YES;
 }

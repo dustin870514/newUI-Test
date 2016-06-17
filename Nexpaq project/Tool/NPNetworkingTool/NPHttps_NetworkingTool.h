@@ -10,6 +10,8 @@
 
 @interface NPHttps_NetworkingTool : NSObject
 
++(void)downloadTilesWithRequest:(NSURLRequest *)request resultClass:(Class)resultClass andDestinationPath:(NSURL *)destinationPath andCompletionHandler:(void (^)(id))completionHandler;
+
 /**
  *  发送一个GET请求
  *

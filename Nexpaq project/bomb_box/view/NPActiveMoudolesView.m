@@ -11,7 +11,7 @@
 #import "UIView+Extension.h"
 #import "NPShowConnectedModual.h"
 #import "AppDelegate.h"
-//#import "NPBLE_Module.h"
+#import "NPBLE_Module.h"
 
 #define PerRowActiveModuleLabeCount 2
 #define PerColumActiveModuleLabeCount 3
