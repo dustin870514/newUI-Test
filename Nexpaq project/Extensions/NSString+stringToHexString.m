@@ -67,27 +67,27 @@
 
 - (NSInteger)numberFromHexString{
 
-    if ([self isEqualToString:@"A"]) {
+    if ([self isEqualToString:@"A"]|| [self isEqualToString:@"a"]) {
         
         return 10;
         
-    }else if([self isEqualToString:@"B"]){
+    }else if([self isEqualToString:@"B"] || [self isEqualToString:@"b"]){
         
         return 11;
         
-    }else if ([self isEqualToString:@"C"]){
+    }else if ([self isEqualToString:@"C"]|| [self isEqualToString:@"c"]){
         
         return 12;
         
-    }else if([self isEqualToString:@"D"]){
+    }else if([self isEqualToString:@"D"] || [self isEqualToString:@"d"]){
         
         return 13;
         
-    }else if ([self isEqualToString:@"E"]){
+    }else if ([self isEqualToString:@"E"] || [self isEqualToString:@"e"]){
         
         return 14;
         
-    }else if([self isEqualToString:@"F"]){
+    }else if([self isEqualToString:@"F"] || [self isEqualToString:@"f"]){
         
         return 15;
         

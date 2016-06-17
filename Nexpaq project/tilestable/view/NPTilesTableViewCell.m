@@ -9,12 +9,16 @@
 #import "NPTilesTableViewCell.h"
 #import "UIView+Extension.h"
 #import "UIImageView+WebCache.h"
+#import "NSString+stringToHexString.h"
+#import "NSString+cut_String.h"
 
 @interface NPTilesTableViewCell()
 
 @property (nonatomic, strong) UIImageView *tileImageView;
+@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UILabel *tileLabel;
 @property (nonatomic, strong) UILabel *tileSubtitleLabel;
+@property (nonatomic, strong) NSString *colorString;
 
 @end
 
@@ -45,15 +49,19 @@
         
         self.tileImageView = [[UIImageView alloc]init];
         
-        self.tileImageView.layer.cornerRadius = 5;
+        self.containerView = [[UIView alloc] init];
         
-        self.tileImageView.layer.masksToBounds = YES;
+        [self.containerView addSubview:self.tileImageView];
+        
+        self.containerView.layer.cornerRadius = 5;
+        
+        self.containerView.layer.masksToBounds = YES;
         
         self.tileLabel = [[UILabel alloc]init];
         
         self.tileSubtitleLabel = [[UILabel alloc]init];
         
-        [self.contentView addSubview:_tileImageView];
+        [self.contentView addSubview:_containerView];
         [self.contentView addSubview:_tileLabel];
         [self.contentView addSubview:_tileSubtitleLabel];
         // cell的设置
@@ -77,7 +85,17 @@
 
     _modules = modules;
     
-    self.tileImageView.frame = CGRectMake(5 , 0, self.width * 0.3, self.height - 5);
+    self.containerView.frame = CGRectMake(5 , 0, self.height - 5, self.height - 5);
+    
+    self.containerView.backgroundColor = [self colorString:modules.background];
+    
+    self.tileImageView.size = CGSizeMake(self.containerView.width * 0.4, self.containerView.height * 0.4);
+    
+    self.tileImageView.x = (self.containerView.width - self.tileImageView.width) * 0.5 ;
+    
+    self.tileImageView.y = (self.containerView.height - self. tileImageView.height) *0.5;
+    
+    NSLog(@"-----%@------0%@---",NSStringFromCGPoint(self.tileImageView.center),NSStringFromCGPoint(self.containerView.center));
     
     [self.tileImageView sd_setImageWithURL:[NSURL URLWithString:modules.icon] placeholderImage:[UIImage imageNamed:@"HomeLeft_Icon"] options:nil];
     
@@ -85,15 +103,15 @@
     
     self.tileLabel.numberOfLines = 0;
     
-    self.tileLabel.frame = CGRectMake(CGRectGetMaxX(self.tileImageView.frame) + 5 , 0 , self.frame.size.width - 10 - self.tileImageView.frame.size.width, self.tileImageView.frame.size.height * 0.3);
+    self.tileLabel.frame = CGRectMake(CGRectGetMaxX(self.containerView.frame) + 5 , 0 , self.frame.size.width - 10 - self.containerView.frame.size.width, self.containerView.frame.size.height * 0.3);
     
-    CGSize maximunSize = CGSizeMake(self.frame.size.width - 10 - self.tileImageView.frame.size.width, 9999);
+    CGSize maximunSize = CGSizeMake(self.frame.size.width - 10 - self.containerView.frame.size.width, 9999);
     
     NSDictionary *attrDict = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
     
     CGSize dataStringSize = [modules.desc boundingRectWithSize:maximunSize options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:attrDict context:nil].size;
     
-    CGRect dataFrame = CGRectMake(CGRectGetMaxX(self.tileImageView.frame) + 5, CGRectGetMaxY(self.tileLabel.frame) + 5 , self.frame.size.width - 10 - self.tileImageView.frame.size.width, dataStringSize.height);
+    CGRect dataFrame = CGRectMake(CGRectGetMaxX(self.containerView.frame) + 5, CGRectGetMaxY(self.tileLabel.frame) + 5 , self.frame.size.width - 10 - self.containerView.frame.size.width, dataStringSize.height);
     
     self.tileSubtitleLabel.font = [UIFont systemFontOfSize:12];
     
@@ -106,6 +124,27 @@
     self.tileLabel.text = modules.name;
     
     self.tileSubtitleLabel.text = modules.desc;
+}
+
+-(UIColor *)colorString:(NSString *)colorString{
+    
+    _colorString = colorString;
+    
+    NSString *redString = [colorString cutStringWithLocation:1 andLenth:2];
+    
+    NSInteger redInteger = [redString numberWithHexString];
+    
+    NSString *greenString = [colorString cutStringWithLocation:3 andLenth:2];
+    
+    NSInteger greenInteger = [greenString numberWithHexString];
+    
+    NSString *blueString = [colorString cutStringWithLocation:5 andLenth:2];
+    
+    NSInteger blueInteger = [blueString numberWithHexString];
+    
+    UIColor *color = [UIColor colorWithRed:redInteger / 255.0 green:greenInteger /  255.0 blue:blueInteger / 255.0 alpha:1];
+    
+    return color;
 }
 
 @end
