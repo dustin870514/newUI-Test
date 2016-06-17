@@ -345,10 +345,7 @@
             }
         
         }
-        
-        
     }
-
 }
 
 - (void)passtiveViewMoveDownWithUnitDistance:(NSInteger)UnitDistance andPasstiveView:(NPMetroSubView *)passtiveView{
@@ -496,8 +493,6 @@
     return (view.position / 6) ;
 }
 
-
-
 #pragma mark - Other Method
 
 - (void)makeSubViewGoToItLocation:(NPMetroSubView *)view{
@@ -568,6 +563,16 @@
     }
     
     return YES;
+}
+
+- (void)clearAllSubbViews{
+
+    for (NPMetroSubView *subView in self.subViews) {
+        
+        [subView removeFromSuperview];
+    }
+    
+    [self.subViews removeAllObjects];
 }
 
 #pragma mark - override Method

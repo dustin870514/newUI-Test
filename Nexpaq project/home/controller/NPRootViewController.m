@@ -17,6 +17,7 @@
 #import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
 #import "NPTileView.h"
+#import "NPTile.h"
 
 #define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
 
@@ -198,7 +199,20 @@
        
        
    }];
+}
 
+- (void)switchGatewayWithTiles:(NSArray *)tiles{
+
+    [self.metroContainerView clearAllSubbViews];
+    
+    for (NPTile *tile in tiles) {
+        
+        NPTileView *tileView = [NPTileView tileViewWithTemplate:tile.tileTemplate];
+        
+        tileView.tile = tile;
+        
+        [self.metroContainerView containerViewIncludeSubView:tileView];
+    }
 }
 
 #pragma mark - setter && getter

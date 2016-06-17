@@ -18,4 +18,6 @@
 
 - (void)containerViewIncludeSubViews:(NSArray *)subViews;
 
+- (void)clearAllSubbViews;
+
 @end

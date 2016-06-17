@@ -35,7 +35,6 @@
 
 }
 
-
 + (instancetype)textAttWithDict:(NSDictionary *)dict{
 
     NPTileTextAttribute *textAtt = [[self alloc] init];
