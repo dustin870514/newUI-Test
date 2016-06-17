@@ -158,8 +158,6 @@
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     
-    [NPFileManager createDirectoryInDocumentWithId:Id];
-    
     NSURL *destinationPath = [NPFileManager destinationPathWithId:Id andName:[NSString stringWithFormat:@"%@.png",name]];
                                             
     [[sessionManager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {

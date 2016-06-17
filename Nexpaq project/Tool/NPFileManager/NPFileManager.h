@@ -30,4 +30,8 @@
 
 + (NSString *)resourcePathWithProduct_id:(NSInteger)prduct_id andName:(NSString *)name;
 
++ (BOOL)arrayWriteToFileId:(NSString *)fileId andObject:(NSArray *)object name:(NSString *)name;
+
++ (BOOL)stringWriteToFileId:(NSString *)fileId andObject:(NSString *)object name:(NSString *)name;
+
 @end

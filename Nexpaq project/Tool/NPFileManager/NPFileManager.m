@@ -128,4 +128,24 @@
     return path;
 }
 
++ (BOOL)arrayWriteToFileId:(NSString *)fileId andObject:(NSArray *)object name:(NSString *)name{
+    
+    NPFileManager *manager = [NPFileManager sharedFileMannager];
+    
+    NSString *file = [NSString stringWithFormat:@"%@/%@/%@",manager.doucumentPath,fileId,name];
+    
+    NSLog(@"file = %@",file);
+
+    return [object writeToFile:file atomically:NO];
+}
+
++ (BOOL)stringWriteToFileId:(NSString *)fileId andObject:(NSString *)object name:(NSString *)name{
+
+    NPFileManager *manager = [NPFileManager sharedFileMannager];
+    
+    NSString *file = [NSString stringWithFormat:@"%@/%@/%@",manager.doucumentPath,fileId,name];
+
+    return [object writeToFile:file atomically:NO encoding:NSUTF8StringEncoding error:nil];
+}
+
 @end
