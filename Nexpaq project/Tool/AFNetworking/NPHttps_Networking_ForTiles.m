@@ -25,6 +25,7 @@
 +(void)downloadTileWithRequest:(NSURLRequest *)request andDestinationPath:(NSURL *)destinationPath completionHandler:(void (^)(id))completionHandler{
     
     [self downloadTilesWithRequest:request resultClass:[NPTilesModules class] andDestinationPath:destinationPath andCompletionHandler:completionHandler];
+    
 }
 
 +(void)downloadTileWithParams:(id)params succsess:(void (^)(NPTilesModulesResults *))success failure:(void (^)(NSError *error))failure{

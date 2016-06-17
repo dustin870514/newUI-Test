@@ -43,6 +43,8 @@
 
 @property (nonatomic, strong) NSNotificationCenter *notifyCenter;
 
+@property (nonatomic, strong) NSString *gateWayDidselected;
+
 @end
 
 @implementation NPRootViewController
