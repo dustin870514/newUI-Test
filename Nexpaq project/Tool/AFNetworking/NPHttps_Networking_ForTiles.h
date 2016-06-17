@@ -16,6 +16,6 @@
 
 + (void)downloadTileResourceWithIdUrl:(NSString *)idUrl andId:(NSString *)Id andSuccess:(void (^)(NPTile *))success andFailure:(void (^)(NSError *erro))failure;
 
-
++(void)downloadTileWithRequest:(NSURLRequest *)request andDestinationPath:(NSURL *)destinationPath completionHandler:(void (^)(id))completionHandler;
 
 @end

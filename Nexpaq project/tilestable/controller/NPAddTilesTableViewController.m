@@ -73,7 +73,11 @@
         self.tilesModulesArray = result;
         
         [self.tableView reloadData];
+        
+        
     }];
+    
+    
 
 }
 

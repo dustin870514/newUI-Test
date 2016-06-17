@@ -9,6 +9,7 @@
 #import "NPHttps_Networking_ForTiles.h"
 #import "NPTilesModulesResults.h"
 #import "NPTileTextAttribute.h"
+#import "NPTilesModules.h"
 #import "NPTile.h"
 
 #define kNPResourceIcon   @"icon"
