@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  Nexpaq project
+//
+//  Created by ben on 16/6/17.
+//  Copyright © 2016年 ben. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define USERGATEWAYTYPE_BYQUEUE @"USERGATEWAYTYPE_BYQUEUE"
+#define USERGATEWAYTYPE_BYSINGLE @"USERGATEWAYTYPE_BYSINGLE"
+#define USERGATEWAYTYPE_BYDOUBLE @"USERGATEWAYTYPE_BYDOUBLE"
+
+#endif /* PrefixHeader_pch */

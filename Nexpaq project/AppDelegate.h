@@ -15,6 +15,8 @@
 @property (nonatomic,strong) NSMutableDictionary *dict;
 @property(nonatomic, assign)BOOL connectedViewIsShow;
 
+@property(nonatomic, strong)NSNotificationCenter *notificationCenter;
+
 
 @end
 

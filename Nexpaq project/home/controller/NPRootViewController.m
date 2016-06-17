@@ -17,6 +17,11 @@
 #import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
 
+#define USER_GATEWAY_TYPE @"USER_GATEWAY_TYPE"
+#define USERGATEWAYTYPEBYQUEUE @"USERGATEWAYTYPEBYQUEUE"
+#define USERGATEWAYTYPEBYSINGLE @"USERGATEWAYTYPEBYSINGLE"
+#define USERGATEWAYTYPEBYDOUBLE @"USERGATEWAYTYPEBYDOUBLE"
+
 // 颜色
 #define NPColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
@@ -32,6 +37,8 @@
 @property (nonatomic, strong) NPMetroContainerView *metroContainerView;
 
 @property(nonatomic, strong) NSMutableArray *tilesModulesArray;
+
+@property(nonatomic, strong)NSString *gateWayDidselected;
 
 @end
 
@@ -76,7 +83,7 @@
     
     [self setUpNavigationItem];
     
-    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:@"UserGateWayTypebyQueue" object:nil];
+    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_TYPE object:nil];
     
 //    self.metroContainerView.frame = self.view.bounds;
     self.metroContainerView.frame = self.view.bounds;
@@ -90,6 +97,7 @@
     self.metroContainerView.scrollEnabled = YES;
     
     [self.view addSubview:self.metroContainerView];
+    
 }
 
 -(void)setupMetroSubviews:(NPMetroContainerView *)metroContainerView{
@@ -148,28 +156,38 @@
 -(void)refreshDashboardByTpye:(NSNotification *)note{
     
     [self.touchMovedView hideDisConnectController];
+    
+   self.gateWayDidselected = note.userInfo[USER_GATEWAY_TYPE];
 
-    NSLog(@"------------refreshDashboardByTpye----------");
+    NSLog(@"------------gateWayDidselected----------%@----------",self.gateWayDidselected);
+    
+    if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYQUEUE]) {
+        
+        
+    }else if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYSINGLE]){
+    
+    
+    }else if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYDOUBLE]){
+    
+    
+    }else{
+    
+    
+    
+    }
+    
+//    switch () {
+//        case USERGATEWAYTYPEBYQUEUE:
+//            
+//            break;
+//            
+//        default:
+//            break;
+//    }
     
 }
 
 -(void)clickRightBarButtonItem{
-    
-//    [NPHttps_Networking_ForTiles downloadTileWithParams:nil succsess:^(NPTilesModulesResults *result) {
-//        
-////        self.tilesModulesArray = result.modulesArray;
-//        
-//        for (NPTilesModules *tempTileModule in result.modulesArray) {
-//            
-//            NPTilesModules *tileModule = tempTileModule;
-//            
-//            [self.tilesModulesArray addObject:tileModule];
-//        }
-//        
-//    } failure:^(NSError *error) {
-//        
-//        
-//    }];
     
     NPAddTilesTableViewController *addTilesTableViewController = [[NPAddTilesTableViewController alloc] init];
     

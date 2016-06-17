@@ -15,7 +15,7 @@
 #import "UIView+Extension.h"
 
 
-@interface NPDisConnectController ()<NPShowGateWayViewDelegate>
+@interface NPDisConnectController ()
 
 @property (nonatomic, strong) NSArray *deviceList;
 
@@ -70,8 +70,6 @@
     [self setupActiveModules];
     
     [self setupInternalBattryView];
-    
-    [self.notificationCenter addObserver:self selector:@selector(setTitleLabelText:) name:@"NPBLE_DEVICE_CONNECTED" object:nil];
 }
 
 -(void)setupActiveModules{
@@ -151,43 +149,8 @@
     
     NPShowGateWayView *gateWayView = [[NPShowGateWayView alloc]initWithContentView:view];
     
-//    gateWayView.delegate = self;
-    
     [gateWayView showInRect:CGRectMake((self.titleLabel.width - 100 )/2, CGRectGetMaxY(self.titleLabel.frame) + 20, 100, 150) atView:self.view];
 }
-
-//#pragma NPShowGateWayViewDelegate
-//
-//-(void)gateWayViewDismiss:(NPShowGateWayView *)popView buttonDidClickedByTag:(UserGateWayTypes)type{
-//
-//    [popView dismiss];
-//    
-//    switch (type) {
-//            
-//        case ModualsTileTypebyQueue:
-//            
-//            [self showAlertView:@"ModualsTileTypebyQueue is selected!!!"];
-//            
-//            break;
-//            
-//        case ModualsTileTypebySingle:
-//            
-//            [self showAlertView:@"ModualsTileTypebySingle is selected!!!"];
-//            
-//            break;
-//            
-//        case ModualsTileTypebyDouble:
-//            
-//            [self showAlertView:@"ModualsTileTypebyDouble is selected!!!"];
-//            
-//            break;
-//            
-//        default:
-//            
-//            break;
-//    }
-//
-//}
 
 
 @end

@@ -295,6 +295,7 @@
 		B53BC62E1D11557600AA25A9 /* NPTilesModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTilesModules.m; sourceTree = "<group>"; };
 		B53BC6301D1156C500AA25A9 /* NPTilesModulesResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTilesModulesResults.h; sourceTree = "<group>"; };
 		B53BC6311D1156C500AA25A9 /* NPTilesModulesResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTilesModulesResults.m; sourceTree = "<group>"; };
+		B540298C1D13936E00683394 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B582D0C41D124B59000704B0 /* NPHttps_Networking_ForTiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NPHttps_Networking_ForTiles.h; path = ../AFNetworking/NPHttps_Networking_ForTiles.h; sourceTree = "<group>"; };
 		B582D0C51D124B59000704B0 /* NPHttps_Networking_ForTiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NPHttps_Networking_ForTiles.m; path = ../AFNetworking/NPHttps_Networking_ForTiles.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -380,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				B53BC4F01D1124C400AA25A9 /* main.m */,
+				B540298C1D13936E00683394 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -474,8 +476,6 @@
 			children = (
 				B53BC5661D1128A300AA25A9 /* NPActiveMoudolesView.h */,
 				B53BC5671D1128A300AA25A9 /* NPActiveMoudolesView.m */,
-				B53BC5681D1128A300AA25A9 /* NPDisConnectedModualsView.h */,
-				B53BC5691D1128A300AA25A9 /* NPDisConnectedModualsView.m */,
 				B53BC56A1D1128A300AA25A9 /* NPInternalBattryView.h */,
 				B53BC56B1D1128A300AA25A9 /* NPInternalBattryView.m */,
 				B53BC56C1D1128A300AA25A9 /* NPTouchMovedView.h */,
@@ -484,6 +484,8 @@
 				B53BC56F1D1128A300AA25A9 /* NPUIbutton.m */,
 				B53BC5B81D11335800AA25A9 /* NPShowGateWayView.h */,
 				B53BC5B91D11335800AA25A9 /* NPShowGateWayView.m */,
+				B53BC5681D1128A300AA25A9 /* NPDisConnectedModualsView.h */,
+				B53BC5691D1128A300AA25A9 /* NPDisConnectedModualsView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1093,6 +1095,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1108,6 +1112,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
