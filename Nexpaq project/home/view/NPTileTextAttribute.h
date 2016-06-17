@@ -13,6 +13,10 @@
 
 @property (nonatomic, assign) NSInteger size;
 
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *color;
+
+@property (nonatomic, copy) NSString *colorString;
+
++ (instancetype)textAttWithDict:(NSDictionary *)dict;
 
 @end

@@ -19,7 +19,7 @@
 @property (nonatomic, strong)  NPTile *tile;
 
 
-+ (instancetype)tileViewWithTemplate:(NPTileTemplate)tileTemplate;
++ (instancetype)tileViewWithTemplate:(NSInteger)tileTemplate;
 
 
 

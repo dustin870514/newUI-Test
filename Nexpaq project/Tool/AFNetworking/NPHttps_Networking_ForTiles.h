@@ -8,10 +8,13 @@
 
 #import "NPHttps_NetworkingTool.h"
 #import "NPTilesModulesResults.h"
+@class NPTile;
 
 @interface NPHttps_Networking_ForTiles : NPHttps_NetworkingTool
 
-+(void)downloadTileWithParams:(id)params succsess:(void (^)(NPTilesModulesResults *result))success failure:(void (^)(NSError *error))failure;
++ (void)downloadTileWithParams:(id)params succsess:(void (^)(NPTilesModulesResults *result))success failure:(void (^)(NSError *error))failure;
+
++ (void)downloadTileResourceWithIdUrl:(NSString *)idUrl andId:(NSString *)Id andSuccess:(void (^)(NPTile *))success andFailure:(void (^)(NSError *erro))failure;
 
 
 

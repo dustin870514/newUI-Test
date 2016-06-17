@@ -37,11 +37,11 @@
 }
 
 
-+ (void)createDirectoryInDocumentWithProduct_id:(NSString *)Product_id{
++ (void)createDirectoryInDocumentWithId:(NSString *)Id{
     
     NSString *pathDocument = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *createPath = [NSString stringWithFormat:@"%@/%@", pathDocument,Product_id];
+    NSString *createPath = [NSString stringWithFormat:@"%@/%@", pathDocument,Id];
     
     NPFileManager *fileMannager = [NPFileManager sharedFileMannager];
     
@@ -62,6 +62,14 @@
     NSURL *path = [[[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil]
                    URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@",product_id,name]];
     
+    return path;
+}
+
++ (NSURL *)destinationPathWithId:(NSString *)Id andName:(NSString *)name{
+
+    NSURL *path = [[[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil]
+                   URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@",Id,name]];
+   
     return path;
 }
 

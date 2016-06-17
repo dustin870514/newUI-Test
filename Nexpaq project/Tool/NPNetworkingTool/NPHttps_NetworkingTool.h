@@ -42,4 +42,6 @@
 
 +(void)postWithUrl:(NSString *)url param:(id)param resultClass:(Class)resultClass success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
++ (void)downLoadResourceWithUrl:(NSString *)url andId:(NSString *)Id andResourceName:(NSString *)name andSuccess:(void (^)(NSString *))success andFailure:(void (^)(NSError *))failure;
+
 @end

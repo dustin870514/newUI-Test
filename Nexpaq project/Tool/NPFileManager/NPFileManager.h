@@ -16,9 +16,11 @@
 
 + (instancetype)sharedFileMannager;
 
-+ (void)createDirectoryInDocumentWithProduct_id:(NSString *)Product_id;
++ (void)createDirectoryInDocumentWithId:(NSString *)Id;
 
 + (NSURL *)destinationPathWithProduct_id:(NSString *)product_id andName:(NSString *)name;
+
++ (NSURL *)destinationPathWithId:(NSString *)Id andName:(NSString *)name;
 
 + (NSURL *)destinationPathWithName:(NSString *)name;
 

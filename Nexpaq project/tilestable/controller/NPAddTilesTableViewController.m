@@ -197,7 +197,7 @@
     
     [self.notificationCenter postNotificationName:MODULETILE_NOTIFY_DIDSELECTED object:nil userInfo:userInfo];
     
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

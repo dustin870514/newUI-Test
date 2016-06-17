@@ -16,6 +16,7 @@
 #import "NPHttps_Networking_ForTiles.h"
 #import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
+#import "NPTileView.h"
 
 #define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
 
@@ -57,7 +58,7 @@
 //    self.metroContainerView.frame = self.view.bounds;
     self.metroContainerView.frame = self.view.bounds;
     
-    self.metroContainerView.backgroundColor = [UIColor lightGrayColor];
+    self.metroContainerView.backgroundColor = [UIColor blackColor];
     
     [self setupMetroSubviews:self.metroContainerView];
     
@@ -70,39 +71,39 @@
 
 -(void)setupMetroSubviews:(NPMetroContainerView *)metroContainerView{
     
-    NPMetroSubView *metroSubview0 = [NPMetroSubView metroSubViewWithType:1 andPosition:0];//0 1 6 7
-    metroSubview0.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview1 = [NPMetroSubView metroSubViewWithType:1 andPosition:2];//2 3 8 9
-    metroSubview1.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview2 = [NPMetroSubView metroSubViewWithType:0 andPosition:4];//4
-    metroSubview2.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview3 = [NPMetroSubView metroSubViewWithType:0 andPosition:5];//5
-    metroSubview3.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview4 = [NPMetroSubView metroSubViewWithType:0 andPosition:10];//10
-    metroSubview4.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview5 = [NPMetroSubView metroSubViewWithType:2 andPosition:12];//12 13 14 15  18 19 20 21
-    metroSubview5.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview6 = [NPMetroSubView metroSubViewWithType:3 andPosition:24];//24 25 26 27 28 29 30 31 32 33 34 35
-    metroSubview6.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview7 = [NPMetroSubView metroSubViewWithType:1 andPosition:36];//36 37 42 43
-    metroSubview7.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview8 = [NPMetroSubView metroSubViewWithType:1 andPosition:38];//38 39 44 45
-    metroSubview8.backgroundColor = NPRandomColor;
-    
-    NPMetroSubView *metroSubview9 = [NPMetroSubView metroSubViewWithType:1 andPosition:40];// 40 41 46 47
-    metroSubview9.backgroundColor = NPRandomColor;
-    
-    NSArray *subviewsArray = @[metroSubview0,metroSubview1,metroSubview2,metroSubview3,metroSubview4,metroSubview5,metroSubview6,metroSubview7,metroSubview8,metroSubview9];
-    
-    [metroContainerView containerViewIncludeSubViews:subviewsArray];
+//    NPMetroSubView *metroSubview0 = [NPMetroSubView metroSubViewWithType:1 andPosition:0];//0 1 6 7
+//    metroSubview0.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview1 = [NPMetroSubView metroSubViewWithType:1 andPosition:2];//2 3 8 9
+//    metroSubview1.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview2 = [NPMetroSubView metroSubViewWithType:0 andPosition:4];//4
+//    metroSubview2.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview3 = [NPMetroSubView metroSubViewWithType:0 andPosition:5];//5
+//    metroSubview3.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview4 = [NPMetroSubView metroSubViewWithType:0 andPosition:10];//10
+//    metroSubview4.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview5 = [NPMetroSubView metroSubViewWithType:2 andPosition:12];//12 13 14 15  18 19 20 21
+//    metroSubview5.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview6 = [NPMetroSubView metroSubViewWithType:3 andPosition:24];//24 25 26 27 28 29 30 31 32 33 34 35
+//    metroSubview6.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview7 = [NPMetroSubView metroSubViewWithType:1 andPosition:36];//36 37 42 43
+//    metroSubview7.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview8 = [NPMetroSubView metroSubViewWithType:1 andPosition:38];//38 39 44 45
+//    metroSubview8.backgroundColor = NPRandomColor;
+//    
+//    NPMetroSubView *metroSubview9 = [NPMetroSubView metroSubViewWithType:1 andPosition:40];// 40 41 46 47
+//    metroSubview9.backgroundColor = NPRandomColor;
+//    
+//    NSArray *subviewsArray = @[metroSubview0,metroSubview1,metroSubview2,metroSubview3,metroSubview4,metroSubview5,metroSubview6,metroSubview7,metroSubview8,metroSubview9];
+//    
+//    [metroContainerView containerViewIncludeSubViews:subviewsArray];
     
 }
 
@@ -166,7 +167,18 @@
     
     NSInteger tileTemplate = [note.userInfo[@"MODULE_TEMPLATE"] integerValue];
     
-    NSLog(@"ID = %zd tem = %zd",ID,tileTemplate);
+    NPTileView *tileView = [NPTileView  tileViewWithTemplate:tileTemplate];
+    
+    [self.metroContainerView containerViewIncludeSubView:tileView];
+    
+   [NPHttps_Networking_ForTiles downloadTileResourceWithIdUrl:[NSString stringWithFormat:@"%zd/tile.txt",ID] andId:[NSString stringWithFormat:@"%zd",ID] andSuccess:^(NPTile *tile) {
+       
+       tileView .tile = tile;
+       
+   } andFailure:^(NSError *error) {
+       
+       
+   }];
 
 }
 

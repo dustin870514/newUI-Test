@@ -49,15 +49,25 @@
     if (self = [super init]) {
         
         self.tileTemplate = tileTemplate;
+        
+        self.layer.cornerRadius = 5;
+        
+        self.position = -1;
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        [self setUpSubViews];
     }
   
     return self;
 }
 
 
-+ (instancetype)tileViewWithTemplate:(NPTileTemplate)tileTemplate{
++ (instancetype)tileViewWithTemplate:(NSInteger)tileTemplate{
+    
+    NPTileTemplate tileTemplateE = [self switchIntegerToNPTileTemplate:tileTemplate];
 
-    return [[self alloc] initWithTileTemplate:tileTemplate];
+    return [[self alloc] initWithTileTemplate:tileTemplateE];
 }
 
 - (void)setTileTypeWithTileTemplate:(NPTileTemplate)tileTemplate{
@@ -75,12 +85,16 @@
             
             self.type = 1;
             
+            break;
+            
             case NPTileTemplateFour:
             case NPTileTemplateFive:
             case NPTileTemplateSix:
             case NPTileTemplateSeven:
             
             self.type = 2;
+            
+            break;
             
         default:
             
@@ -90,28 +104,33 @@
     }
 }
 
+
+
 - (void)setUpSubViews{
    
     switch (self.tileTemplate) {
         case NPTileTemplateOne:
             
-            self.iconView_0.center = self.center;
             self.iconView_0.width = self.width * 0.6;
             self.iconView_0.height = self.iconView_0.width;
+            self.iconView_0.x = (self.width - self.iconView_0.width) * 0.5;
+            self.iconView_0.y = (self.height - self.iconView_0.height) * 0.5;
             [self addSubview:self.iconView_0];
     
             break;
             
         case NPTileTemplateTwo:
-            
-            self.iconView_0.center = self.center;
+        
             self.iconView_0.width = self.width * 0.6;
             self.iconView_0.height = self.iconView_0.width;
+            self.iconView_0.x = (self.width - self.iconView_0.width) * 0.5;
+            self.iconView_0.y = (self.height - self.iconView_0.height) * 0.5;
             [self addSubview:self.iconView_0];
             
             self.titleLabel.x = 0;
             self.titleLabel.y = 0;
             self.titleLabel.height = self.height * 0.2;
+            self.titleLabel.width = self.width;
             [self addSubview:self.titleLabel];
             
             break;
@@ -120,13 +139,14 @@
             
             self.iconView_0.width = self.width * 0.2;
             self.iconView_0.height =self.iconView_0.width;
-            self.x = 0;
-            self.y = 0;
+            self.iconView_0.x = 0;
+            self.iconView_0.y = 0;
             [self addSubview:self.iconView_0];
             
             self.textLable_0.width = self.width * 0.6;
             self.textLable_0.height = self.textLable_0.width;
-            self.textLable_0.center = self.center;
+            self.textLable_0.x = (self.width - self.textLable_0.width) * 0.5;
+            self.textLable_0.y = (self.height - self.textLable_0.height) * 0.5;
             [self addSubview:self.textLable_0];
             
             break;
@@ -180,9 +200,83 @@
     
     self.statusView.width = self.height * 0.2;
     
-    self.statusView.height = self.width;
+    self.statusView.height = self.statusView.width;
     
     [self addSubview:self.statusView];
+}
+
++ (NPTileTemplate)switchIntegerToNPTileTemplate:(NSInteger)integer{
+
+    switch (integer) {
+        case 1:
+            
+            return NPTileTemplateOne;
+            
+            break;
+        case 2:
+            
+            return NPTileTemplateTwo;
+            
+            break;
+        case 3:
+            
+            return NPTileTemplateThree;
+            
+            break;
+        case 4:
+            
+            return NPTileTemplateFour;
+            
+            break;
+        case 5:
+            
+            return NPTileTemplateFive;
+            
+            break;
+        case 6:
+            
+            return NPTileTemplateSix;
+            
+            break;
+        case 7:
+            
+            return NPTileTemplateSeven;
+            
+            break;
+        case 8:
+            
+            return NPTileTemplateEight;
+            
+            break;
+        case 9:
+            
+            return NPTileTemplateNine;
+            
+            break;
+        case 10:
+            
+            return NPTileTemplateTen;
+            
+            break;
+        case 11:
+            
+            return NPTileTemplateEleven;
+            
+            break;
+        case 12:
+            
+            return NPTileTemplateTwelve;
+            
+            break;
+        case 13:
+            
+            return NPTileTemplateThirteen;
+            
+            break;
+    }
+    
+    return 0;
+
 }
 
 #pragma mark - setter && getter
@@ -204,19 +298,19 @@
     
     self.textLable_0.font = [UIFont systemFontOfSize:tileTextLeftAtt.size];
         
-    self.textLable_0.textColor = tileTextLeftAtt.textColor;
+    self.textLable_0.textColor = tileTextLeftAtt.color;
     
     NPTileTextAttribute *tileTextMiddleAtt = tile.textAtts[kNPTileTextMiddleAtt];
     
     self.textLable_1.font = [UIFont systemFontOfSize:tileTextMiddleAtt.size];
     
-    self.textLable_1.textColor = tileTextLeftAtt.textColor;
+    self.textLable_1.textColor = tileTextLeftAtt.color;
     
     NPTileTextAttribute *tileTextRightAtt = tile.textAtts[kNPTileTextRightAtt];
     
     self.textLable_2.font = [UIFont systemFontOfSize:tileTextRightAtt.size];
     
-    self.textLable_2.textColor = tileTextRightAtt.textColor;
+    self.textLable_2.textColor = tileTextRightAtt.color;
     
     self.statusView.image = [UIImage imageWithContentsOfFile:tile.statusImagePaths[kNPTileStatusDefault]];
   
@@ -226,7 +320,7 @@
 
     _tileTemplate = tileTemplate;
     
-    [self setTileTemplate:tileTemplate];
+    [self setTileTypeWithTileTemplate:tileTemplate];
 }
 
 - (void)setFrame:(CGRect)frame{
@@ -295,6 +389,8 @@
     if (_textLable_0 == nil) {
         
         _textLable_0 = [[UILabel alloc] init];
+        
+        _textLable_0.text = @"NexPaq";
     }
     
     return _textLable_0;
@@ -305,6 +401,8 @@
     if (_textLable_1 == nil) {
         
         _textLable_1 = [[UILabel alloc] init];
+        
+        _textLable_1.text = @"NexPaq";
     }
   
     return _textLable_1;
@@ -315,6 +413,8 @@
     if (_textLable_2 == nil) {
         
         _textLable_2 = [[UILabel alloc] init];
+        
+        _textLable_2.text = @"NexPaq";
     }
   
     return _textLable_2;
