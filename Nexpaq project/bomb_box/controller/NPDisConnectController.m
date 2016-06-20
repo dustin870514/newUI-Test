@@ -150,7 +150,7 @@
 
 -(void)toShowGatewayViews{
     
-     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
     
     self.resoureData = [NSData dataWithContentsOfFile:filePath];
     
