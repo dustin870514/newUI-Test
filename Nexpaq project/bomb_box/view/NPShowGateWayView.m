@@ -30,6 +30,8 @@
 
 @property(nonatomic, strong)NSMutableArray *gatewaysArray;
 
+@property(nonatomic, strong)NPGatewayUser *user;
+
 @end
 
 @implementation NPShowGateWayView
@@ -97,20 +99,20 @@
     self.contentView.width = self.containerView.width - leftMargin - rightMargin;
     self.contentView.height = self.containerView.height - topMargin - bottonMargin;
     
-    for (NSInteger index = 0; index < gateArray.count; index++) {
+    self.user = gateArray[0];
+    
+    for (NSInteger index = 0; index < self.user.gateways.count; index++) {
         
         CGFloat margin = 10;
-        CGFloat buttonHeigth = self.contentView.height / gateArray.count - 10;
+        CGFloat buttonHeigth = self.contentView.height / self.user.gateways.count - 10;
         
         CGFloat buttonY = (buttonHeigth + margin) * index + margin;
         
-        NPGatewayUser *user = gateArray[index];
-        
         UIButton *gatewayeButton = [[UIButton alloc]init];
         
-        [gatewayeButton setTitle:user.user forState:UIControlStateNormal];
+        NPGatewaysModule *getewayModule = self.user.gateways[index];
         
-        NPGatewaysModule *getewayModule = user.gateways[0];
+        [gatewayeButton setTitle:getewayModule.uuid forState:UIControlStateNormal];
         
         NSLog(@"---------%@--------",getewayModule.uuid);
         
@@ -122,16 +124,14 @@
         
         [self.contentView addSubview:gatewayeButton];
         
-        [gatewayeButton addTarget:self action:@selector(queueButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [gatewayeButton addTarget:self action:@selector(gatewayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
     }
 }
 
--(void)queueButtonClicked:(UIButton *)button{
+-(void)gatewayButtonClicked:(UIButton *)button{
     
-    NPGatewayUser *user = self.gatewaysArray[button.tag];
-    
-     NPGatewaysModule *getewayModule = user.gateways[button.tag];
+     NPGatewaysModule *getewayModule = self.user.gateways[button.tag];
     
     NSDictionary *dict = [NSDictionary dictionaryWithObject:getewayModule.uuid forKey:USER_GATEWAY_UUID];
     

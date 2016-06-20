@@ -11,10 +11,10 @@
 
 @interface NPGatewaysModule : NSObject
 
-@property(nonatomic, strong)NPGatewayTileModule *tiles;
+//@property(nonatomic, strong)NPGatewayTileModule *tiles;
 
 @property(nonatomic, copy) NSString *uuid;
 
-//@property(nonatomic, strong) NSMutableArray *tiles;
+@property(nonatomic, strong) NSMutableArray *tiles;
 
 @end

@@ -12,18 +12,18 @@
 
 @implementation NPGatewaysModule
 
-//+(NSDictionary *)mj_objectClassInArray{
-//    
-//    return @{@"tiles" : [NPGatewayTileModule class]};
-//}
-//
-//+ (Class)objectClassInArray:(NSString *)propertyName
-//{
-//    if ([propertyName isEqualToString:@"tiles"]) {
-//        
-//        return [NPGatewayTileModule class];
-//    }
-//    return nil;
-//}
++(NSDictionary *)mj_objectClassInArray{
+    
+    return @{@"tiles" : [NPGatewayTileModule class]};
+}
+
++ (Class)objectClassInArray:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:@"tiles"]) {
+        
+        return [NPGatewayTileModule class];
+    }
+    return nil;
+}
 
 @end
