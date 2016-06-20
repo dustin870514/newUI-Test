@@ -7,7 +7,23 @@
 //
 
 #import "NPGatewayUser.h"
+#import "MJExtension.h"
+#import "NPGatewaysModule.h"
 
 @implementation NPGatewayUser
+
++(NSDictionary *)mj_objectClassInArray{
+    
+    return @{@"gateways" : [NPGatewaysModule class]};
+}
+
++ (Class)objectClassInArray:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:@"gateways"]) {
+        
+        return [NPGatewaysModule class];
+    }
+    return nil;
+}
 
 @end

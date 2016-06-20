@@ -15,4 +15,6 @@
 
 @property(nonatomic, copy) NSString *uuid;
 
+//@property(nonatomic, strong) NSMutableArray *tiles;
+
 @end
