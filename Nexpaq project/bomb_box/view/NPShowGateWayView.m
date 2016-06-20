@@ -110,7 +110,9 @@
         
         [gatewayeButton setTitle:user.user forState:UIControlStateNormal];
         
-//        NSLog(@"---------%@--------",user.gateways.uuid);
+        NPGatewaysModule *getewayModule = user.gateways[0];
+        
+        NSLog(@"---------%@--------",getewayModule.uuid);
         
         gatewayeButton.frame = CGRectMake(5, buttonY, self.contentView.width - margin , buttonHeigth);
         
@@ -129,7 +131,9 @@
     
     NPGatewayUser *user = self.gatewaysArray[button.tag];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:user.gateways.uuid forKey:USER_GATEWAY_UUID];
+     NPGatewaysModule *getewayModule = user.gateways[button.tag];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:getewayModule.uuid forKey:USER_GATEWAY_UUID];
     
     [self.app.notificationCenter postNotificationName:USER_GATEWAY_UUID object:nil userInfo:dict];
     

@@ -13,6 +13,8 @@
 
 @property(nonatomic, copy) NSString *user;
 
-@property(nonatomic, strong) NPGatewaysModule *gateways;
+//@property(nonatomic, strong) NPGatewaysModule *gateways;
+
+@property(nonatomic, strong) NSMutableArray *gateways;
 
 @end

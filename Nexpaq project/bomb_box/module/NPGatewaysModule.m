@@ -7,7 +7,23 @@
 //
 
 #import "NPGatewaysModule.h"
+#import "MJExtension.h"
+#import "NPGatewayTileModule.h"
 
 @implementation NPGatewaysModule
+
+//+(NSDictionary *)mj_objectClassInArray{
+//    
+//    return @{@"tiles" : [NPGatewayTileModule class]};
+//}
+//
+//+ (Class)objectClassInArray:(NSString *)propertyName
+//{
+//    if ([propertyName isEqualToString:@"tiles"]) {
+//        
+//        return [NPGatewayTileModule class];
+//    }
+//    return nil;
+//}
 
 @end

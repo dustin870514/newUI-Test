@@ -158,7 +158,7 @@
     
     self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
     
-//    NSLog(@"-----%ld-------",self.gatewaysArray.count);
+    NSLog(@"-----%ld-------",self.gatewaysArray.count);
     
     UIView *view = [[UIView alloc]init];
     
