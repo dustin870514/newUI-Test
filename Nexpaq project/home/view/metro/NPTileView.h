@@ -21,6 +21,6 @@
 
 + (instancetype)tileViewWithTemplate:(NSInteger)tileTemplate;
 
-
++ (instancetype)tileViewWithTemplate:(NSInteger)tileTemplate andPosition:(NSInteger)position;
 
 @end

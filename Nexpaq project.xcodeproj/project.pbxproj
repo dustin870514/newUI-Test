@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17347BB01D17B8E90029ABF6 /* gateways.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17347BAF1D17B8E90029ABF6 /* gateways.txt */; };
 		17FB6D7F1D124844009B2482 /* NPMetroContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */; };
 		17FB6D801D124844009B2482 /* NPMetroSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7E1D124844009B2482 /* NPMetroSubView.m */; };
 		17FB6D831D1248C8009B2482 /* NPTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D821D1248C8009B2482 /* NPTileView.m */; };
@@ -118,6 +119,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17347BAF1D17B8E90029ABF6 /* gateways.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gateways.txt; sourceTree = "<group>"; };
 		17FB6D7B1D124844009B2482 /* NPMetroContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroContainerView.h; sourceTree = "<group>"; };
 		17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroContainerView.m; sourceTree = "<group>"; };
 		17FB6D7D1D124844009B2482 /* NPMetroSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroSubView.h; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		B53BC4EF1D1124C400AA25A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				17347BAF1D17B8E90029ABF6 /* gateways.txt */,
 				B53BC4F01D1124C400AA25A9 /* main.m */,
 				B540298C1D13936E00683394 /* PrefixHeader.pch */,
 			);
@@ -867,6 +870,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53BC4FF1D1124C400AA25A9 /* LaunchScreen.storyboard in Resources */,
+				17347BB01D17B8E90029ABF6 /* gateways.txt in Resources */,
 				B53BC4FC1D1124C400AA25A9 /* Assets.xcassets in Resources */,
 				B53BC5F01D11511000AA25A9 /* Info.plist in Resources */,
 			);

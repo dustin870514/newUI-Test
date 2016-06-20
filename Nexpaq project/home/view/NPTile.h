@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) NPTileTemplate tileTemplate;
 
+@property (nonatomic, copy) NSString *Id;
+
 @property (nonatomic, strong) NSMutableDictionary *statusImagePaths;
 
 @property (nonatomic, strong) NSMutableDictionary *iconImagePaths;

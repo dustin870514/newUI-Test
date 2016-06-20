@@ -29,6 +29,11 @@
 // 随机色
 #define NPRandomColor NPColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
+
+#define kNPGatewayId  @"id"
+#define kNPGatewayTemplate @"template"
+#define kNPGatewayPosition @"position"
+
 @interface NPRootViewController()
 
 @property(nonatomic, strong)NPTouchMovedView *touchMovedView;
@@ -132,10 +137,52 @@
     
     [self.touchMovedView hideDisConnectController];
     
+    [self.metroContainerView clearAllSubbViews];
+    
     self.gateWayDidselected = note.userInfo[USER_GATEWAY_UUID];
     
-    NSLog(@"------------gateWayDidselected.UUID----------%@----------",self.gateWayDidselected);
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil]];
     
+    NSMutableArray *users = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    NSDictionary *user = users.lastObject;
+    
+    NSArray *gateways = user[@"gateways"];
+    
+    for (NSDictionary *dict in gateways) {
+        
+        if ([dict[@"uuid"] isEqualToString:self.gateWayDidselected]) {
+            
+            NSArray *titles = dict[@"tiles"];
+            
+            for (NSDictionary *dict in titles) {
+                
+                NSString *Id = [NSString stringWithFormat:@"%@",dict[kNPGatewayId]];
+                
+                NSString *tileTemplate = dict[kNPGatewayTemplate];
+                
+                NSString *position = dict[kNPGatewayPosition];
+                
+                NPTileView *tileView = [NPTileView tileViewWithTemplate:[tileTemplate integerValue] andPosition:[position integerValue]];
+                
+                [self.metroContainerView containerViewIncludeSubView:tileView];
+                
+                [NPHttps_Networking_ForTiles downloadTileResourceWithIdUrl:[NSString stringWithFormat:@"%zd/title.txt",Id] andId:Id andSuccess:^(NPTile *tile) {
+                    
+                    tileView.tile = tile;
+                    
+                } andFailure:^(NSError *erro) {
+                    
+                    if (erro) {
+                        
+                        NSLog(@"er = %@",erro);
+                    }
+                    
+                }];
+            }
+        }
+    }
+
 }
 
 -(void)clickRightBarButtonItem{
@@ -172,20 +219,6 @@
        
        
    }];
-}
-
-- (void)switchGatewayWithTiles:(NSArray *)tiles{
-
-    [self.metroContainerView clearAllSubbViews];
-    
-    for (NPTile *tile in tiles) {
-        
-        NPTileView *tileView = [NPTileView tileViewWithTemplate:tile.tileTemplate];
-        
-        tileView.tile = tile;
-        
-        [self.metroContainerView containerViewIncludeSubView:tileView];
-    }
 }
 
 #pragma mark - setter && getter

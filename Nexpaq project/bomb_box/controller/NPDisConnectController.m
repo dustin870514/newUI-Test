@@ -180,8 +180,6 @@
     
     self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
     
-    NSLog(@"-----%ld-------",self.gatewaysArray.count);
-    
     UIView *view = [[UIView alloc]init];
     
     view.backgroundColor = [UIColor lightGrayColor];

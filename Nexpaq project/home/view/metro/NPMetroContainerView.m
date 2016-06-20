@@ -426,7 +426,6 @@
                 [self makeSubViewGoToItLocation:passtiveView];
                 
                 return;
-                
             }
         }
         

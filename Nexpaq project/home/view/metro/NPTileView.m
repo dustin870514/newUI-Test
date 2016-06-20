@@ -70,6 +70,15 @@
     return [[self alloc] initWithTileTemplate:tileTemplateE];
 }
 
++ (instancetype)tileViewWithTemplate:(NSInteger)tileTemplate andPosition:(NSInteger)position{
+
+    NPTileView *tileView = [self tileViewWithTemplate:tileTemplate];
+    
+    tileView.position = position;
+    
+    return tileView;
+}
+
 - (void)setTileTypeWithTileTemplate:(NPTileTemplate)tileTemplate{
 
     switch (tileTemplate) {
