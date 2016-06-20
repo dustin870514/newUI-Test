@@ -60,6 +60,18 @@
     return _notificationCenter;
 }
 
+-(instancetype)init{
+    
+    self = [super init];
+    
+    if (self) {
+        
+         [self loadgatewayData];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -78,7 +90,19 @@
     
     [self setupInternalBattryView];
 }
+-(void)loadgatewayData{
 
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
+    
+    self.resoureData = [NSData dataWithContentsOfFile:filePath];
+    
+    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:self.resoureData options:NSJSONReadingMutableContainers error:nil];
+    
+    self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
+    
+    NSLog(@"-----%ld-------",self.gatewaysArray.count);
+
+}
 -(void)setupActiveModules{
 
     _activeMoudolesView = [[NPActiveMoudolesView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width*0.85, self.view.frame.size.height * 0.25)];
@@ -114,17 +138,15 @@
 
 -(void)setupTitleView:(UIView *)titleView{
 
-//    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width*0.8, titleView.frame.size.height)];
+    NPGatewayUser *user = self.gatewaysArray[0];
     
-//    NPBLE_Device *device = self.deviceList.lastObject;
-//    
-//    titleLabel.text = device.peripheral.name;
+    self.titleLabel.text = user.user;
     
     self.titleLabel.frame = CGRectMake(0, 0, titleView.frame.size.width*0.5, titleView.frame.size.height);
     
-     self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-     self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.textColor = [UIColor whiteColor];
     
     UIButton *changeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX( self.titleLabel.frame), 0, titleView.frame.size.width*0.3, titleView.frame.size.height)];
     
@@ -149,17 +171,7 @@
 }
 
 -(void)toShowGatewayViews{
-    
-     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
-    
-    self.resoureData = [NSData dataWithContentsOfFile:filePath];
-    
-    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:self.resoureData options:NSJSONReadingMutableContainers error:nil];
-    
-    self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
-    
-    NSLog(@"-----%ld-------",self.gatewaysArray.count);
-    
+         
     UIView *view = [[UIView alloc]init];
     
     view.backgroundColor = [UIColor lightGrayColor];
