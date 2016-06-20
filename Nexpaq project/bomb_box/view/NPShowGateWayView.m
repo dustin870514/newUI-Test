@@ -131,7 +131,7 @@
     
     NPGatewayUser *user = self.gatewaysArray[button.tag];
     
-     NPGatewaysModule *getewayModule = user.gateways[button.tag];
+     NPGatewaysModule *getewayModule = user.gateways[0];
     
     NSDictionary *dict = [NSDictionary dictionaryWithObject:getewayModule.uuid forKey:USER_GATEWAY_UUID];
     
