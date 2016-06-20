@@ -21,10 +21,7 @@
 
 #define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
 
-#define USER_GATEWAY_TYPE @"USER_GATEWAY_TYPE"
-#define USERGATEWAYTYPEBYQUEUE @"USERGATEWAYTYPEBYQUEUE"
-#define USERGATEWAYTYPEBYSINGLE @"USERGATEWAYTYPEBYSINGLE"
-#define USERGATEWAYTYPEBYDOUBLE @"USERGATEWAYTYPEBYDOUBLE"
+#define USER_GATEWAY_UUID @"USER_GATEWAY_UUID"
 
 // 颜色
 #define NPColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
@@ -61,7 +58,7 @@
     
     [self setUpNavigationItem];
     
-    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_TYPE object:nil];
+    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_UUID object:nil];
     
 //    self.metroContainerView.frame = self.view.bounds;
     self.metroContainerView.frame = self.view.bounds;
@@ -135,33 +132,9 @@
     
     [self.touchMovedView hideDisConnectController];
     
-   self.gateWayDidselected = note.userInfo[USER_GATEWAY_TYPE];
-
-//    NSLog(@"------------gateWayDidselected----------%@----------",self.gateWayDidselected);
+    self.gateWayDidselected = note.userInfo[USER_GATEWAY_UUID];
     
-    if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYQUEUE]) {
-        
-        
-    }else if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYSINGLE]){
-    
-    
-    }else if ([self.gateWayDidselected isEqualToString:USERGATEWAYTYPEBYDOUBLE]){
-    
-    
-    }else{
-    
-    
-    
-    }
-    
-//    switch () {
-//        case USERGATEWAYTYPEBYQUEUE:
-//            
-//            break;
-//            
-//        default:
-//            break;
-//    }
+    NSLog(@"------------gateWayDidselected.UUID----------%@----------",self.gateWayDidselected);
     
 }
 

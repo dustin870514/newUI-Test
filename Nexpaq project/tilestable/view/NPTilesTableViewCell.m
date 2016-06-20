@@ -95,8 +95,6 @@
     
     self.tileImageView.y = (self.containerView.height - self. tileImageView.height) *0.5;
     
-    NSLog(@"-----%@------0%@---",NSStringFromCGPoint(self.tileImageView.center),NSStringFromCGPoint(self.containerView.center));
-    
     [self.tileImageView sd_setImageWithURL:[NSURL URLWithString:modules.icon] placeholderImage:[UIImage imageNamed:@"HomeLeft_Icon"] options:nil];
     
     self.tileLabel.font = [UIFont systemFontOfSize:18];

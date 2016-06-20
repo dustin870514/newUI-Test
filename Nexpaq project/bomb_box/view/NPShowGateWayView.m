@@ -9,6 +9,10 @@
 #import "NPShowGateWayView.h"
 #import "UIView+Extension.h"
 #import "AppDelegate.h"
+#import "NPGatewayUser.h"
+#import "NPGatewaysModule.h"
+#import "NPGatewayTileModule.h"
+#import "MJExtension.h"
 
 @interface NPShowGateWayView()
 /*
@@ -23,6 +27,8 @@
 @property(nonatomic, strong)NSNotificationCenter *notificationCenter;
 
 @property(nonatomic, strong)AppDelegate *app;
+
+@property(nonatomic, strong)NSMutableArray *gatewaysArray;
 
 @end
 
@@ -69,79 +75,66 @@
     return self;
 }
 
--(void)showInRect:(CGRect)rect atView:(UIView *)view{
+-(void)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray{
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     self.frame = window.bounds;
     [window addSubview:self];
     
-//    [view addSubview:self];
-
     self.containerView.frame = rect;
     [self.containerView addSubview:self.contentView];//add the contentView in the container
+    
+    self.gatewaysArray = gateArray;
     
     //set the margin of contentView from container
     CGFloat topMargin = 12;
     CGFloat leftMargin = 5;
     CGFloat rightMargin = 5;
-    CGFloat bottonMargin = 8 ;
+    CGFloat bottonMargin = 8;
     
     self.contentView.x = leftMargin;
     self.contentView.y = topMargin;
     self.contentView.width = self.containerView.width - leftMargin - rightMargin;
     self.contentView.height = self.containerView.height - topMargin - bottonMargin;
     
-    UIButton *queueButton = [[UIButton alloc]init];
-    [queueButton setTitle:@"gateway1" forState:UIControlStateNormal];
-    queueButton.frame = CGRectMake(5, 10, self.contentView.width - 10 , 30);
-    queueButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [queueButton addTarget:self action:@selector(queueButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *singleButton = [[UIButton alloc]init];
-    [singleButton setTitle:@"gateway2" forState:UIControlStateNormal];
-    singleButton.frame = CGRectMake(5, CGRectGetMaxY(queueButton.frame) + 10, self.contentView.width - 10, 30);
-    singleButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [singleButton addTarget:self action:@selector(singleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *doubleButton = [[UIButton alloc]init];
-    [doubleButton setTitle:@"gateway3" forState:UIControlStateNormal];
-    doubleButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    doubleButton.frame = CGRectMake(5, CGRectGetMaxY(singleButton.frame) + 10, self.contentView.width - 10, 30);
-    [doubleButton addTarget:self action:@selector(doubleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.contentView addSubview:queueButton];
-    [self.contentView addSubview:singleButton];
-    [self.contentView addSubview:doubleButton];
-    
-    queueButton.userInteractionEnabled = YES;
+    for (NSInteger index = 0; index < gateArray.count; index++) {
+        
+        CGFloat margin = 10;
+        CGFloat buttonHeigth = self.contentView.height / gateArray.count - 10;
+        
+        CGFloat buttonY = (buttonHeigth + margin) * index + margin;
+        
+        NPGatewayUser *user = gateArray[index];
+        
+        UIButton *gatewayeButton = [[UIButton alloc]init];
+        
+        [gatewayeButton setTitle:user.user forState:UIControlStateNormal];
+        
+//        NSLog(@"---------%@--------",user.gateways.uuid);
+        
+        gatewayeButton.frame = CGRectMake(5, buttonY, self.contentView.width - margin , buttonHeigth);
+        
+        gatewayeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        
+        gatewayeButton.tag = index;
+        
+        [self.contentView addSubview:gatewayeButton];
+        
+        [gatewayeButton addTarget:self action:@selector(queueButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
 }
 
 -(void)queueButtonClicked:(UIButton *)button{
     
+    NPGatewayUser *user = self.gatewaysArray[button.tag];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYQUEUE forKey:USER_GATEWAY_TYPE];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:user.gateways.uuid forKey:USER_GATEWAY_UUID];
     
-    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
-    
-    [self dismiss];
-    
-}
--(void)singleButtonClicked:(UIButton *)button{
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYSINGLE forKey:USER_GATEWAY_TYPE];
-    
-    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
+    [self.app.notificationCenter postNotificationName:USER_GATEWAY_UUID object:nil userInfo:dict];
     
     [self dismiss];
-}
-
--(void)doubleButtonClicked:(UIButton *)button{
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:USERGATEWAYTYPEBYDOUBLE forKey:USER_GATEWAY_TYPE];
-    
-    [self.app.notificationCenter postNotificationName:USER_GATEWAY_TYPE object:nil userInfo:dict];
-    
-    [self dismiss];
 }
 
 -(void)dismiss{

@@ -13,6 +13,9 @@
 #import "NPBLE_Device.h"
 #import "NPShowGateWayView.h"
 #import "UIView+Extension.h"
+#import "NPGatewayUser.h"
+#import "MJExtension.h"
+#import "NPGatewayUser.h"
 
 
 @interface NPDisConnectController ()
@@ -28,6 +31,10 @@
 @property(nonatomic, strong) NSNotificationCenter *notificationCenter;
 
 @property(nonatomic, strong) UILabel *titleLabel;
+
+@property(nonatomic, strong)NSData *resoureData;
+
+@property(nonatomic, strong)NSMutableArray *gatewaysArray;
 
 @end
 
@@ -142,14 +149,24 @@
 }
 
 -(void)toShowGatewayViews{
-
+    
+     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
+    
+    self.resoureData = [NSData dataWithContentsOfFile:filePath];
+    
+    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:self.resoureData options:NSJSONReadingMutableContainers error:nil];
+    
+    self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
+    
+//    NSLog(@"-----%ld-------",self.gatewaysArray.count);
+    
     UIView *view = [[UIView alloc]init];
     
     view.backgroundColor = [UIColor lightGrayColor];
     
     NPShowGateWayView *gateWayView = [[NPShowGateWayView alloc]initWithContentView:view];
     
-    [gateWayView showInRect:CGRectMake((self.titleLabel.width - 100 )/2, CGRectGetMaxY(self.titleLabel.frame) + 20, 100, 150) atView:self.view];
+    [gateWayView showInRect:CGRectMake((self.titleLabel.width - 100 )/2, CGRectGetMaxY(self.titleLabel.frame) + 20, 100, 150) atView:self.view gatewayArray:self.gatewaysArray];
 }
 
 
