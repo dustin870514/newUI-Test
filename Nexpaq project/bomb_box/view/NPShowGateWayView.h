@@ -16,7 +16,7 @@ typedef enum UserGateWayTypes{
     
 }UserGateWayTypes;
 
-#define USER_GATEWAY_TYPE @"USER_GATEWAY_TYPE"
+#define USER_GATEWAY_UUID @"USER_GATEWAY_UUID"
 #define USERGATEWAYTYPEBYQUEUE @"USERGATEWAYTYPEBYQUEUE"
 #define USERGATEWAYTYPEBYSINGLE @"USERGATEWAYTYPEBYSINGLE"
 #define USERGATEWAYTYPEBYDOUBLE @"USERGATEWAYTYPEBYDOUBLE"
@@ -40,6 +40,8 @@ typedef enum UserGateWayTypes{
  * 显示菜单
  */
 -(void)showInRect:(CGRect)rect atView:(UIView *)view;
+
+-(void)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray;
 
 /*
  * 关闭菜单
