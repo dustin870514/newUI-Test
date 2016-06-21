@@ -13,6 +13,7 @@
 #import "UIView+Extension.h"
 #import "NPAddTilesTableViewController.h"
 #import "UIBarButtonItem+extention.h"
+#import "UIImage+Not_stretch.h"
 #import "NPHttps_Networking_ForTiles.h"
 #import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
@@ -58,6 +59,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    self.title = @"Home";
     
     [self.notifyCenter addObserver:self selector:@selector(addTile:) name:MODULETILE_NOTIFY_DIDSELECTED object:nil];
     
@@ -121,9 +124,15 @@
 
 -(void)setUpNavigationItem{
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(clickLeftBarButtonItem)];
+    UIBarButtonItem *settingButton =  [[UIBarButtonItem alloc] initWithTitle:@"setting" style:  UIBarButtonItemStylePlain target:self action:@selector( clickLeftBarButtonItem)];
+
+    UIBarButtonItem *addTilesButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickRightBarButtonItem)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(clickRightBarButtonItem)];
+    UIBarButtonItem *scanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageOrginWithName:@"HomeLeft_Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(scanDevice)];
+    
+    self.navigationItem.leftBarButtonItem = settingButton;
+    
+    self.navigationItem.rightBarButtonItems = @[scanButton,addTilesButton];
 }
 
 -(void)clickLeftBarButtonItem{
@@ -195,6 +204,14 @@
     
 }
 
+- (void)scanDevice{
+ 
+    
+    
+
+
+}
+
 -(void)back{
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -216,8 +233,10 @@
        
    } andFailure:^(NSError *error) {
        
-       
-       
+       if (error) {
+           
+           NSLog(@"er = %@",error);
+       }
    }];
 }
 

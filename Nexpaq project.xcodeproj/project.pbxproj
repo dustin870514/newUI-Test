@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		17347BB01D17B8E90029ABF6 /* gateways.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17347BAF1D17B8E90029ABF6 /* gateways.txt */; };
+		17347BB61D18EA160029ABF6 /* NPDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17347BB51D18EA160029ABF6 /* NPDiscoverController.m */; };
 		17FB6D7F1D124844009B2482 /* NPMetroContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */; };
 		17FB6D801D124844009B2482 /* NPMetroSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7E1D124844009B2482 /* NPMetroSubView.m */; };
 		17FB6D831D1248C8009B2482 /* NPTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D821D1248C8009B2482 /* NPTileView.m */; };
@@ -120,6 +121,8 @@
 
 /* Begin PBXFileReference section */
 		17347BAF1D17B8E90029ABF6 /* gateways.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gateways.txt; sourceTree = "<group>"; };
+		17347BB41D18EA160029ABF6 /* NPDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPDiscoverController.h; sourceTree = "<group>"; };
+		17347BB51D18EA160029ABF6 /* NPDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPDiscoverController.m; sourceTree = "<group>"; };
 		17FB6D7B1D124844009B2482 /* NPMetroContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroContainerView.h; sourceTree = "<group>"; };
 		17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroContainerView.m; sourceTree = "<group>"; };
 		17FB6D7D1D124844009B2482 /* NPMetroSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroSubView.h; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 				B53BC5251D11256F00AA25A9 /* NPNavigationController.m */,
 				B53BC5261D11256F00AA25A9 /* NPRootViewController.h */,
 				B53BC5271D11256F00AA25A9 /* NPRootViewController.m */,
+				17347BB41D18EA160029ABF6 /* NPDiscoverController.h */,
+				17347BB51D18EA160029ABF6 /* NPDiscoverController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -901,6 +906,7 @@
 				B53BC6251D11531E00AA25A9 /* SDWebImagePrefetcher.m in Sources */,
 				B53BC5A91D112C2A00AA25A9 /* NPBLE_CommandString.m in Sources */,
 				B53BC5741D1128A300AA25A9 /* NPUIbutton.m in Sources */,
+				17347BB61D18EA160029ABF6 /* NPDiscoverController.m in Sources */,
 				B53BC5F21D11511000AA25A9 /* MJFoundation.m in Sources */,
 				B53BC5A61D112C2A00AA25A9 /* NPBLE_Parse.m in Sources */,
 				B53BC61E1D11531E00AA25A9 /* NSData+ImageContentType.m in Sources */,

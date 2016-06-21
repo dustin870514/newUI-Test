@@ -132,8 +132,6 @@
     self.movingEndedBlock(self);
 }
 
-
-
 #pragma mark - setter && getter
 
 - (void)setPosition:(NSInteger)position{

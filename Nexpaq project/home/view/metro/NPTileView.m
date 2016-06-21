@@ -113,8 +113,6 @@
     }
 }
 
-
-
 - (void)setUpSubViews{
    
     switch (self.tileTemplate) {
@@ -129,6 +127,8 @@
             break;
             
         case NPTileTemplateTwo:
+        case NPTileTemplateFour:
+        case NPTileTemplateEight:
         
             self.iconView_0.width = self.width * 0.6;
             self.iconView_0.height = self.iconView_0.width;
@@ -145,6 +145,8 @@
             break;
             
         case NPTileTemplateThree:
+        case NPTileTemplateSix:
+        case NPTileTemplateEleven:
             
             self.iconView_0.width = self.width * 0.2;
             self.iconView_0.height =self.iconView_0.width;
@@ -157,6 +159,79 @@
             self.textLable_0.x = (self.width - self.textLable_0.width) * 0.5;
             self.textLable_0.y = (self.height - self.textLable_0.height) * 0.5;
             [self addSubview:self.textLable_0];
+            
+            break;
+            
+        case NPTileTemplateFive:
+        case NPTileTemplateNine:
+            
+            self.iconView_0.height = self.height * 0.6;
+            self.iconView_0.width = self.iconView_0.height;
+            self.iconView_0.x = (self.width - self.margin) / 2 * 0.2;
+            self.iconView_0.y = self.height * 0.2;
+            
+            self.iconView_1.width = self.iconView_0.width;
+            self.iconView_1.height = self.iconView_0.height;
+            self.iconView_1.x = (self.width + self.margin) / 2 + (self.width - self.margin) / 2 * 0.2;
+            self.iconView_1.y = self.iconView_0.y;
+            
+            self.titleLabel.x = 0;
+            self.titleLabel.y = 0;
+            self.titleLabel.height = self.height * 0.2;
+            self.titleLabel.width = self.width;
+            
+            break;
+            
+        case NPTileTemplateSeven:
+        case NPTileTemplateTwelve:
+            
+            self.iconView_0.x = 0;
+            self.iconView_0.y = 0;
+            self.iconView_0.width = (self.width  -  self.margin) / 2 * 0.2  ;
+            self.iconView_0.height = self.iconView_0.width;
+            [self addSubview:self.iconView_0];
+            
+            self.textLable_0.x = self.iconView_0.width;
+            self.textLable_0.y = self.iconView_0.height;
+            self.textLable_0.width = (self.width  -   self.margin) / 2 * 0.6;
+            self.textLable_0.height = self.textLable_0.width;
+            [self addSubview:self.textLable_0];
+            
+            self.iconView_1.x = (self.width + self.margin) / 2;
+            self.iconView_1.y = 0;
+            self.iconView_1.width = self.iconView_0.width;
+            self.iconView_1.height = self.iconView_0.height;
+            [self addSubview:self.iconView_1];
+            
+            self.textLable_1.x = self.iconView_1.width + self.iconView_1.x;
+            self.textLable_1.y = self.iconView_1.height;
+            self.textLable_1.width = (self.width  -  2 * self.margin) / 2 * 0.6;
+            self.textLable_1.height = self.textLable_1.width;
+            [self addSubview:self.textLable_1];
+            
+            break;
+            
+        case NPTileTemplateTen:
+            
+            self.iconView_0.height = self.height * 0.6;
+            self.iconView_0.width = self.iconView_0.height;
+            self.iconView_0.x = (self.width - 2 *self.margin) / 3 * 0.2;
+            self.iconView_0.y = self.height * 0.2;
+            
+            self.iconView_1.width = self.iconView_0.width;
+            self.iconView_1.height = self.iconView_0.height;
+            self.iconView_1.x = (self.width + self.margin) / 3 + (self.width - 2 *self.margin) / 3 * 0.2;
+            self.iconView_1.y = self.iconView_0.y;
+            
+            self.iconView_2.width = self.iconView_0.width;
+            self.iconView_2.height = self.iconView_0.height;
+            self.iconView_2.x = (self.width + self.margin) / 3 * 2 + (self.width - 2 *self.margin) / 3 * 0.2;
+            self.iconView_2.y = self.iconView_0.y;
+            
+            self.titleLabel.x = 0;
+            self.titleLabel.y = 0;
+            self.titleLabel.height = self.height * 0.2;
+            self.titleLabel.width = self.width;
             
             break;
             
@@ -198,8 +273,6 @@
             self.textLable_2.height = self.textLable_2.width;
             [self addSubview:self.textLable_2];
             
-            
-        default:
             break;
     }
     
