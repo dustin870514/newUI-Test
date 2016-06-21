@@ -12,11 +12,7 @@
 #import "NPInternalBattryView.h"
 #import "NPBLE_Device.h"
 #import "NPShowGateWayView.h"
-#import "UIView+Extension.h"
 #import "NPGatewayUser.h"
-#import "MJExtension.h"
-#import "NPGatewayUser.h"
-
 
 @interface NPDisConnectController ()
 
@@ -35,6 +31,12 @@
 @property(nonatomic, strong)NSData *resoureData;
 
 @property(nonatomic, strong)NSMutableArray *gatewaysArray;
+
+@property(nonatomic, assign) BOOL isShowGatewayView;
+
+@property(nonatomic, strong) UIView *gatewayView;
+
+@property(nonatomic, strong) NPGatewayUser *user;
 
 @end
 
@@ -76,9 +78,7 @@
     
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor redColor];
-    
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width * 0.85, 40)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width * 0.85, 44)];
     
     titleView.backgroundColor = [UIColor lightGrayColor];
     
@@ -89,6 +89,8 @@
     [self setupActiveModules];
     
     [self setupInternalBattryView];
+    
+    [self setupGatewayView];
 }
 -(void)loadgatewayData{
 
@@ -105,7 +107,7 @@
 }
 -(void)setupActiveModules{
 
-    _activeMoudolesView = [[NPActiveMoudolesView alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width*0.85, self.view.frame.size.height * 0.25)];
+    _activeMoudolesView = [[NPActiveMoudolesView alloc] initWithFrame:CGRectMake(0, 44, self.view.width*0.85, self.view.height * 0.25)];
     
     [self.view addSubview:_activeMoudolesView];
     
@@ -113,11 +115,11 @@
 
 -(void)setupInternalBattryView{
     
-    _internalBattryView = [[NPInternalBattryView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_activeMoudolesView.frame), self.view.frame.size.width*0.85, self.view.frame.size.height * 0.2)];
+    _internalBattryView = [[NPInternalBattryView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_activeMoudolesView.frame), self.view.width*0.85, self.view.height * 0.2)];
     
     [self.view addSubview:_internalBattryView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5 , CGRectGetMaxY(_internalBattryView.frame)+ 5 , self.view.frame.size.width*0.85, self.view.frame.size.height * 0.1)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5 , CGRectGetMaxY(_internalBattryView.frame)+ 5 , self.view.width*0.85, self.view.height * 0.1)];
     
     label.numberOfLines = 0;
     label.textColor = [UIColor lightGrayColor];
@@ -138,29 +140,31 @@
 
 -(void)setupTitleView:(UIView *)titleView{
 
-    NPGatewayUser *user = self.gatewaysArray[0];
+    self.user = self.gatewaysArray[0];
     
-    self.titleLabel.text = user.user;
+    self.titleLabel.text = self.user.user;
     
-    self.titleLabel.frame = CGRectMake(0, 0, titleView.frame.size.width*0.5, titleView.frame.size.height);
+    self.titleLabel.frame = CGRectMake(0, 0, titleView.width*0.6, titleView.height);
     
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     self.titleLabel.textColor = [UIColor whiteColor];
     
-    UIButton *changeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX( self.titleLabel.frame), 0, titleView.frame.size.width*0.3, titleView.frame.size.height)];
+    UIButton *changeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX( self.titleLabel.frame), 0, titleView.width*0.2, titleView.height)];
     
     [changeButton setTitle:@"change" forState:UIControlStateNormal];
     
+    changeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
     [changeButton addTarget:self action:@selector(toShowGatewayViews) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *hideViewButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(changeButton.frame), 0, titleView.frame.size.width*0.2, titleView.frame.size.height)];
+    UIButton *hideViewButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(changeButton.frame), 0, titleView.width*0.2, titleView.height)];
     
     [hideViewButton setTitle:@"hide" forState:UIControlStateNormal];
     
-    [hideViewButton addTarget:self action:@selector(toHideDisConnectController) forControlEvents:UIControlEventTouchUpInside];
+    hideViewButton.titleLabel.font = [UIFont systemFontOfSize:14];
     
-    [hideViewButton setImage:[UIImage imageNamed:@"hidemodualview"] forState:UIControlStateNormal];
+    [hideViewButton addTarget:self action:@selector(toHideDisConnectController) forControlEvents:UIControlEventTouchUpInside];
     
     [titleView addSubview:hideViewButton];
     
@@ -172,22 +176,35 @@
 
 -(void)toShowGatewayViews{
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil];
+    if (!self.isShowGatewayView) {
+        
+        self.gatewayView.hidden = NO;
+        self.isShowGatewayView = YES;
+        
+    }else{
     
-    self.resoureData = [NSData dataWithContentsOfFile:filePath];
-    
-    NSMutableArray *tempArray = [NSJSONSerialization JSONObjectWithData:self.resoureData options:NSJSONReadingMutableContainers error:nil];
-    
-    self.gatewaysArray = [NPGatewayUser mj_objectArrayWithKeyValuesArray:tempArray];
+        self.gatewayView.hidden = YES;
+        self.isShowGatewayView = NO;
+    }
+}
+
+-(void)setupGatewayView{
     
     UIView *view = [[UIView alloc]init];
     
     view.backgroundColor = [UIColor lightGrayColor];
     
-    NPShowGateWayView *gateWayView = [[NPShowGateWayView alloc]initWithContentView:view];
-    
-    [gateWayView showInRect:CGRectMake((self.titleLabel.width - 100 )/2, CGRectGetMaxY(self.titleLabel.frame) + 20, 100, 150) atView:self.view gatewayArray:self.gatewaysArray];
-}
+    NPShowGateWayView *gateway = [[NPShowGateWayView alloc]initWithContentView:view];
 
+//    [gateWayView showInRect:CGRectMake((self.titleLabel.width - 100 )/2, CGRectGetMaxY(self.titleLabel.frame) + 20, 100, 150) atView:self.view gatewayArray:self.gatewaysArray];
+    
+    self.gatewayView = [gateway showInRect:CGRectMake((self.view.width*0.85*0.5 - 100)/2, 22, 100, 150) atView:self.view gatewayArray:self.gatewaysArray];
+    
+    self.gatewayView.hidden = YES;
+    
+    self.isShowGatewayView = NO;
+    
+   [self.view addSubview:self.gatewayView];
+}
 
 @end

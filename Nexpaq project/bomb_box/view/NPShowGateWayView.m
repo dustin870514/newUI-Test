@@ -71,18 +71,19 @@
         [self addSubview:containerView];
         
         self.containerView = containerView;
-        
     }
     
     return self;
 }
 
--(void)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray{
+-(UIView *)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray{
     
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    self.frame = window.bounds;
-    [window addSubview:self];
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    self.frame = window.bounds;
+//    [window addSubview:self];
     
+    self.frame = rect;
+
     self.containerView.frame = rect;
     [self.containerView addSubview:self.contentView];//add the contentView in the container
     
@@ -100,11 +101,11 @@
     self.contentView.height = self.containerView.height - topMargin - bottonMargin;
     
     self.user = gateArray[0];
+    CGFloat margin = 5;
     
     for (NSInteger index = 0; index < self.user.gateways.count; index++) {
         
-        CGFloat margin = 10;
-        CGFloat buttonHeigth = self.contentView.height / self.user.gateways.count - 10;
+        CGFloat buttonHeigth = (self.contentView.height - margin * (self.user.gateways.count + 1)) / self.user.gateways.count;
         
         CGFloat buttonY = (buttonHeigth + margin) * index + margin;
         
@@ -116,17 +117,24 @@
         
         NSLog(@"---------%@--------",getewayModule.uuid);
         
-        gatewayeButton.frame = CGRectMake(5, buttonY, self.contentView.width - margin , buttonHeigth);
+        gatewayeButton.frame = CGRectMake(5, buttonY, self.contentView.width - margin * 2 , buttonHeigth);
         
         gatewayeButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
         gatewayeButton.tag = index;
         
-        [self.contentView addSubview:gatewayeButton];
+        gatewayeButton.backgroundColor = [UIColor colorWithRed:0.8f green:0.2f blue:0.2f alpha:0.5f];
+        
+        gatewayeButton.layer.cornerRadius = 5;
+        
+        gatewayeButton.clipsToBounds = YES;
         
         [gatewayeButton addTarget:self action:@selector(gatewayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
+        [self.contentView addSubview:gatewayeButton];
     }
+    
+    return self;
 }
 
 -(void)gatewayButtonClicked:(UIButton *)button{
@@ -153,6 +161,22 @@
     
     return [imgae stretchableImageWithLeftCapWidth:imgae.size.width*0.5 topCapHeight:imgae.size.height*0.5];
 }
+
+//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//
+//    UIView *hitView = [super hitTest:point withEvent:event];
+//    
+//    if (hitView == self || hitView == self.contentView) {
+//        
+//        [self removeFromSuperview];
+//        
+//    }else{
+//        
+//        [self gatewayButtonClicked:(UIButton *)hitView];
+//    }
+//    
+//    return hitView;
+//}
 
 
 @end

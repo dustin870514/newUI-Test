@@ -8,13 +8,11 @@
 
 #import "NPAddTilesTableViewController.h"
 #import "NPTilesTableViewCell.h"
-#import "UIView+Extension.h"
 #import "NPPopTileTypeMenu.h"
 #import "NPHttps_Networking_ForTiles.h"
 #import "NPTilesModulesResults.h"
 #import "AFNetworking.h"
 #import "NPTilesModules.h"
-#import "MJExtension.h"
 
 @interface NPAddTilesTableViewController ()<NPPopTileTypeMenuDelegate>
 
@@ -60,23 +58,31 @@
 
 -(void)downloadTileModules{
     
-    NSString *url = @"http://vpn2.coody.top/nexpaq-app-beta-resources/tiles/tiles.txt";
+    NSData *tilesData = [NSData dataWithContentsOfFile:[self filePath].path];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",url]]];
-    
-    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    
-    NSURL *filePath = [documentsDirectoryURL URLByAppendingPathComponent:@"tiles.txt"];
-    
-    [NPHttps_Networking_ForTiles downloadTileWithRequest:request andDestinationPath:filePath completionHandler:^(NSMutableArray *result) {
+    if (tilesData != nil) {
         
-        self.tilesModulesArray = result;
-        
+        self.tilesModulesArray = [NPTilesModules mj_objectArrayWithKeyValuesArray:[NSJSONSerialization JSONObjectWithData:tilesData options:0 error:nil]];
         [self.tableView reloadData];
         
+    }else{
         
-    }];
-    
+        NSString *url = @"http://vpn2.coody.top/nexpaq-app-beta-resources/tiles/tiles.txt";
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",url]]];
+        
+        NSURL *filePath = [self filePath];
+        
+        [NPHttps_Networking_ForTiles downloadTileWithRequest:request andDestinationPath:filePath completionHandler:^(NSMutableArray *result) {
+            
+            self.tilesModulesArray = result;
+            
+            [self.tableView reloadData];
+            
+        }];
+
+    }
+        
 }
 
 -(UIView *)navigationItemView{
@@ -121,19 +127,13 @@
             
         case ModualsTileTypebyQueue:
             
-            [self showAlertView:@"ModualsTileTypebyQueue is selected!!!"];
-            
             break;
             
         case ModualsTileTypebySingle:
             
-            [self showAlertView:@"ModualsTileTypebySingle is selected!!!"];
-            
             break;
             
         case ModualsTileTypebyDouble:
-            
-            [self showAlertView:@"ModualsTileTypebyDouble is selected!!!"];
             
             break;
             
@@ -143,16 +143,11 @@
     }
 }
 
--(void)showAlertView:(NSString *)message{
-
-    
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 4;
+    return self.tilesModulesArray.count == 0 ? 1000 : self.tilesModulesArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -188,5 +183,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(NSURL *)filePath{
+    
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
 
+    return [documentsDirectoryURL URLByAppendingPathComponent:@"tiles.txt"];
+}
 @end

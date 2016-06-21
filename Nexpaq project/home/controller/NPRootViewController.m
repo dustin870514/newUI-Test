@@ -10,12 +10,10 @@
 #import "NPTouchMovedView.h"
 #import "NPMetroContainerView.h"
 #import "NPMetroSubView.h"
-#import "UIView+Extension.h"
 #import "NPAddTilesTableViewController.h"
 #import "UIBarButtonItem+extention.h"
 #import "UIImage+Not_stretch.h"
 #import "NPHttps_Networking_ForTiles.h"
-#import "NPTilesModulesResults.h"
 #import "NPTilesModules.h"
 #import "NPTileView.h"
 #import "NPTile.h"
@@ -40,13 +38,11 @@
 
 @interface NPRootViewController()<NPDiscoverControllerDelegate>
 
-@property(nonatomic, strong)NPTouchMovedView *touchMovedView;
-
-@property(nonatomic, strong)NSNotificationCenter *notificationCenter;
+@property (nonatomic, strong) NPTouchMovedView *touchMovedView;
 
 @property (nonatomic, strong) NPMetroContainerView *metroContainerView;
 
-@property(nonatomic, strong) NSMutableArray *tilesModulesArray;
+@property (nonatomic, strong) NSMutableArray *tilesModulesArray;
 
 @property (nonatomic, strong) NSString *gateWayDidselected;
 
@@ -71,9 +67,8 @@
     
     [self setUpNavigationItem];
     
-    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_UUID object:nil];
-    
-//    self.metroContainerView.frame = self.view.bounds;
+    [self.notifyCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_UUID object:nil];
+
     self.metroContainerView.frame = self.view.bounds;
     
     self.metroContainerView.backgroundColor = [UIColor blackColor];
@@ -85,6 +80,17 @@
     self.metroContainerView.scrollEnabled = YES;
     
     [self.view addSubview:self.metroContainerView];
+}
+
+- (void)setUpNotifyCation{
+    
+    [self.notifyCenter addObserver:self selector:@selector(getDeviceUUID:) name:NPBLE_NOTIFY_DEVICEGETUUID object:nil];
+    
+    [self.notifyCenter addObserver:self selector:@selector(getModualUUID:) name:NPBLE_NOTIFY_MODULEGETUUID object:nil];
+    
+    [self.notifyCenter addObserver:self selector:@selector(getModualResult:) name:NPBLE_NOTIFY_REFRSHUI object:nil];
+    
+    [self.notifyCenter addObserver:self selector:@selector(modualPushOut:) name:NPBLE_NOTIFY_MODULEPULLOUT object:nil];
 }
 
 -(void)setupMetroSubviews:(NPMetroContainerView *)metroContainerView{
@@ -100,6 +106,8 @@
 //    
 //    NPMetroSubView *metroSubview3 = [NPMetroSubView metroSubViewWithType:0 andPosition:5];//5
 //    metroSubview3.backgroundColor = NPRandomColor;
+    
+    
 //    
 //    NPMetroSubView *metroSubview4 = [NPMetroSubView metroSubViewWithType:0 andPosition:10];//10
 //    metroSubview4.backgroundColor = NPRandomColor;
@@ -124,7 +132,6 @@
 //    [metroContainerView containerViewIncludeSubViews:subviewsArray];
     
 }
-
 
 -(void)setUpNavigationItem{
 
@@ -315,22 +322,69 @@
 
 -(NSMutableArray *)tilesModulesArray{
     
-    if (_tilesModulesArray == nil) {
+    NPBLE_Device *device = userInfo.userInfo[NPBLE_NOTIFY_DEVICE];
+    
+    NPBLE_Module *module = userInfo.userInfo[NPBLE_NOTIFY_MODULE];
+    
+    module.isMatch = YES; //set this for YES by manual befor the service is ok;
+    
+    [[NPBLE_Manager sharedNPBLE_Manager] NPBLE_RequestInformationOfCurrentModule:module andInCurrentDevice:device];//result will be backed by listioning the noti;
+    NSLog(@"--------module UUID-------%@",module.module_uuid);
+    
+}
+
+-(void)getModualResult:(NSNotification *)note{//has new module connected
+    
+    NPBLE_Module *module = note.userInfo[NPBLE_NOTIFY_MODULE];
+    
+    NPBLE_Module_Info *info = module.info;
+    
+    if (self.app.connectedViewIsShow == NO) {
         
         _tilesModulesArray = [NSMutableArray array];
     }
     
-    return _tilesModulesArray;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:module forKey:@"NPBLE_NEW_MODULE_CONNECTED"];
+    
+    [self.notifyCenter postNotificationName:@"NPBLE_NEW_MODULE_CONNECTED" object:nil userInfo:userInfo];//post noti to refresh the activeModualView
+    
 }
 
--(NSNotificationCenter *)notificationCenter{
+-(void)modualPushOut:(NSNotification *)note{
     
-    if (_notificationCenter == nil) {
+    NPBLE_Module *module = note.userInfo[NPBLE_NOTIFY_MODULE];
+    
+    NSString *node_id = module.node_id;//which modual has push out;
+    
+    if (self.app.connectedViewIsShow == NO) {
         
         _notificationCenter = [NSNotificationCenter defaultCenter];
     }
     
-    return _notificationCenter;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:module forKey:@"NPBLE_MODULE_PUSHOUT"];
+    
+    [self.notifyCenter postNotificationName:@"NPBLE_MODULE_PUSHOUT" object:nil userInfo:userInfo];
+    
+    NSLog(@"第 %@ 个模块已经拔出",node_id);
+}
+
+-(void)hideDisConnectController{
+    
+    [self.touchMovedView hideDisConnectController];
+    
+    [self.timer invalidate];
+}
+
+#pragma mark - setter && getter
+
+-(NSMutableArray *)tilesModulesArray{
+    
+    if (_tilesModulesArray == nil) {
+        
+        self.tilesModulesArray = [NSMutableArray array];
+    }
+    
+    return _tilesModulesArray;
 }
 
 -(NPMetroContainerView *)metroContainerView{
@@ -343,5 +397,15 @@
     return _metroContainerView;
 }
 
+
+-(AppDelegate *)app{
+
+    if (_app == nil) {
+        
+        self.app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    }
+    
+    return _app;
+}
 
 @end

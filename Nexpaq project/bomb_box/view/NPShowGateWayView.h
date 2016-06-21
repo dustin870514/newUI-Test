@@ -41,7 +41,7 @@ typedef enum UserGateWayTypes{
  */
 -(void)showInRect:(CGRect)rect atView:(UIView *)view;
 
--(void)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray;
+-(UIView *)showInRect:(CGRect)rect atView:(UIView *)view gatewayArray:(NSMutableArray *)gateArray;
 
 /*
  * 关闭菜单
