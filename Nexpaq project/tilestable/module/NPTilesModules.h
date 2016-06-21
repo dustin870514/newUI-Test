@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NPTilesModules : NSObject
+@interface NPTilesModules : NSObject<NSCoding>
 
 @property(nonatomic, assign)NSInteger id;
 

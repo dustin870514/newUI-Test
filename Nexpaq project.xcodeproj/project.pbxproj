@@ -307,6 +307,7 @@
 		B54029D81D14020A00683394 /* NPGatewaysModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPGatewaysModule.m; sourceTree = "<group>"; };
 		B54029DA1D14032100683394 /* NPGatewayTileModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPGatewayTileModule.h; sourceTree = "<group>"; };
 		B54029DB1D14032100683394 /* NPGatewayTileModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPGatewayTileModule.m; sourceTree = "<group>"; };
+		B54ABB891D18DD61002291FB /* NP-PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NP-PrefixHeader.pch"; sourceTree = "<group>"; };
 		B582D0C41D124B59000704B0 /* NPHttps_Networking_ForTiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NPHttps_Networking_ForTiles.h; path = ../AFNetworking/NPHttps_Networking_ForTiles.h; sourceTree = "<group>"; };
 		B582D0C51D124B59000704B0 /* NPHttps_Networking_ForTiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NPHttps_Networking_ForTiles.m; path = ../AFNetworking/NPHttps_Networking_ForTiles.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -383,6 +384,7 @@
 				B53BC5001D1124C400AA25A9 /* Info.plist */,
 				B53BC4F21D1124C400AA25A9 /* AppDelegate.h */,
 				B53BC4F31D1124C400AA25A9 /* AppDelegate.m */,
+				B54ABB891D18DD61002291FB /* NP-PrefixHeader.pch */,
 				B53BC4EF1D1124C400AA25A9 /* Supporting Files */,
 			);
 			path = "Nexpaq project";
@@ -1118,7 +1120,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "Nexpaq project/NP-PrefixHeader.pch";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1135,7 +1137,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "Nexpaq project/NP-PrefixHeader.pch";
 				INFOPLIST_FILE = "Nexpaq project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
