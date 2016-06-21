@@ -50,6 +50,8 @@
 
 @property (nonatomic, strong) UIButton *coverButton;
 
+@property (nonatomic, strong) NSNotificationCenter *notificationCenter;
+
 @end
 
 @implementation NPRootViewController
@@ -67,7 +69,7 @@
     
     [self setUpNavigationItem];
     
-    [self.notifyCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_UUID object:nil];
+    [self.notificationCenter addObserver:self selector:@selector(refreshDashboardByTpye:) name:USER_GATEWAY_UUID object:nil];
 
     self.metroContainerView.frame = self.view.bounds;
     
@@ -80,17 +82,6 @@
     self.metroContainerView.scrollEnabled = YES;
     
     [self.view addSubview:self.metroContainerView];
-}
-
-- (void)setUpNotifyCation{
-    
-    [self.notifyCenter addObserver:self selector:@selector(getDeviceUUID:) name:NPBLE_NOTIFY_DEVICEGETUUID object:nil];
-    
-    [self.notifyCenter addObserver:self selector:@selector(getModualUUID:) name:NPBLE_NOTIFY_MODULEGETUUID object:nil];
-    
-    [self.notifyCenter addObserver:self selector:@selector(getModualResult:) name:NPBLE_NOTIFY_REFRSHUI object:nil];
-    
-    [self.notifyCenter addObserver:self selector:@selector(modualPushOut:) name:NPBLE_NOTIFY_MODULEPULLOUT object:nil];
 }
 
 -(void)setupMetroSubviews:(NPMetroContainerView *)metroContainerView{
@@ -320,62 +311,17 @@
     return _coverButton;
 }
 
--(NSMutableArray *)tilesModulesArray{
-    
-    NPBLE_Device *device = userInfo.userInfo[NPBLE_NOTIFY_DEVICE];
-    
-    NPBLE_Module *module = userInfo.userInfo[NPBLE_NOTIFY_MODULE];
-    
-    module.isMatch = YES; //set this for YES by manual befor the service is ok;
-    
-    [[NPBLE_Manager sharedNPBLE_Manager] NPBLE_RequestInformationOfCurrentModule:module andInCurrentDevice:device];//result will be backed by listioning the noti;
-    NSLog(@"--------module UUID-------%@",module.module_uuid);
-    
-}
+#pragma mark - setter && getter
 
--(void)getModualResult:(NSNotification *)note{//has new module connected
-    
-    NPBLE_Module *module = note.userInfo[NPBLE_NOTIFY_MODULE];
-    
-    NPBLE_Module_Info *info = module.info;
-    
-    if (self.app.connectedViewIsShow == NO) {
-        
-        _tilesModulesArray = [NSMutableArray array];
-    }
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:module forKey:@"NPBLE_NEW_MODULE_CONNECTED"];
-    
-    [self.notifyCenter postNotificationName:@"NPBLE_NEW_MODULE_CONNECTED" object:nil userInfo:userInfo];//post noti to refresh the activeModualView
-    
-}
+-(NSNotificationCenter *)notificationCenter{
 
--(void)modualPushOut:(NSNotification *)note{
-    
-    NPBLE_Module *module = note.userInfo[NPBLE_NOTIFY_MODULE];
-    
-    NSString *node_id = module.node_id;//which modual has push out;
-    
-    if (self.app.connectedViewIsShow == NO) {
+    if (_notificationCenter == nil) {
         
         _notificationCenter = [NSNotificationCenter defaultCenter];
     }
     
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:module forKey:@"NPBLE_MODULE_PUSHOUT"];
-    
-    [self.notifyCenter postNotificationName:@"NPBLE_MODULE_PUSHOUT" object:nil userInfo:userInfo];
-    
-    NSLog(@"第 %@ 个模块已经拔出",node_id);
+    return _notificationCenter;
 }
-
--(void)hideDisConnectController{
-    
-    [self.touchMovedView hideDisConnectController];
-    
-    [self.timer invalidate];
-}
-
-#pragma mark - setter && getter
 
 -(NSMutableArray *)tilesModulesArray{
     
@@ -395,17 +341,6 @@
     }
     
     return _metroContainerView;
-}
-
-
--(AppDelegate *)app{
-
-    if (_app == nil) {
-        
-        self.app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    }
-    
-    return _app;
 }
 
 @end
