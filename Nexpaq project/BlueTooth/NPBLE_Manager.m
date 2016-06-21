@@ -57,6 +57,8 @@
 
 @property (nonatomic, copy) void (^updateProgressHandler)(NSString *,BOOL *);
 
+@property (nonatomic, strong) NSMutableArray *disCoverDevices;
+
 @property (nonatomic, assign) BOOL isUpdating;
 
 @property (nonatomic, assign) BOOL isStopUpdating;
@@ -137,9 +139,16 @@
 
     NPBLE_Device *device = [NPBLE_Device NPBLE_DeviceWithPeripheral:peripheral]; //包装NPBLE_Device
     
-    [[NPBLE_DeviceManager sharedNPBLE_DeviceManager].disCoverDevices addObject:device];
+    [self.disCoverDevices addObject:device];
     
-    self.didDiscoverDevice([NPBLE_DeviceManager sharedNPBLE_DeviceManager].disCoverDevices);//执行回调block
+    [NPBLE_DeviceManager sharedNPBLE_DeviceManager].disCoverDevices  = [NSMutableArray arrayWithArray:self.disCoverDevices];
+    
+    self.didDiscoverDevice(self.disCoverDevices);//执行回调block
+}
+
+- (void)clearDiscoverDevices{
+    
+    [self.disCoverDevices removeAllObjects];
 }
 
 //已经连接的蓝牙设备
@@ -685,6 +694,18 @@
     }
     
     return nil;
+}
+
+#pragma mark - getter && setter 
+
+- (NSMutableArray *)disCoverDevices{
+
+    if (_disCoverDevices == nil) {
+        
+        _disCoverDevices = [NSMutableArray array];
+    }
+  
+    return _disCoverDevices;
 }
 
 @end

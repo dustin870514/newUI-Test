@@ -33,6 +33,12 @@
  *
  *  @param device  蓝牙设备实例对象
  */
+
+/**
+ *  清理发现设备的数组
+ */
+- (void)clearDiscoverDevices;
+
 - (void)NPBLE_ConnectDevice:(NPBLE_Device *)device andCompletionHandler:(void(^)(NPBLE_Device *))completionHandler;
 /**
  *   请求获取case信息

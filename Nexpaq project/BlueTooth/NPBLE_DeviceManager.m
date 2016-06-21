@@ -44,16 +44,6 @@
 
 #pragma mark - setter && getter
 
-- (NSMutableArray *)disCoverDevices{
-
-    if (_disCoverDevices == nil) {
-        
-        _disCoverDevices = [NSMutableArray array];
-    }
-  
-    return _disCoverDevices;
-}
-
 - (NSMutableArray *)devices{
 
     if (_devices == nil) {

@@ -19,6 +19,9 @@
 #import "NPTilesModules.h"
 #import "NPTileView.h"
 #import "NPTile.h"
+#import "NPDiscoverController.h"
+#import "NPBLE_Manager.h"
+#import "NPBLE_Device.h"
 
 #define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
 
@@ -35,7 +38,7 @@
 #define kNPGatewayTemplate @"template"
 #define kNPGatewayPosition @"position"
 
-@interface NPRootViewController()
+@interface NPRootViewController()<NPDiscoverControllerDelegate>
 
 @property(nonatomic, strong)NPTouchMovedView *touchMovedView;
 
@@ -45,9 +48,11 @@
 
 @property(nonatomic, strong) NSMutableArray *tilesModulesArray;
 
-@property (nonatomic, strong) NSNotificationCenter *notifyCenter;
-
 @property (nonatomic, strong) NSString *gateWayDidselected;
+
+@property (nonatomic, strong) NPDiscoverController *discoverController;
+
+@property (nonatomic, strong) UIButton *coverButton;
 
 @end
 
@@ -62,7 +67,7 @@
     
     self.title = @"Home";
     
-    [self.notifyCenter addObserver:self selector:@selector(addTile:) name:MODULETILE_NOTIFY_DIDSELECTED object:nil];
+    [self.notificationCenter addObserver:self selector:@selector(addTile:) name:MODULETILE_NOTIFY_DIDSELECTED object:nil];
     
     [self setUpNavigationItem];
     
@@ -80,7 +85,6 @@
     self.metroContainerView.scrollEnabled = YES;
     
     [self.view addSubview:self.metroContainerView];
-    
 }
 
 -(void)setupMetroSubviews:(NPMetroContainerView *)metroContainerView{
@@ -132,7 +136,7 @@
     
     self.navigationItem.leftBarButtonItem = settingButton;
     
-    self.navigationItem.rightBarButtonItems = @[scanButton,addTilesButton];
+    self.navigationItem.rightBarButtonItems = @[addTilesButton,scanButton];
 }
 
 -(void)clickLeftBarButtonItem{
@@ -205,11 +209,17 @@
 }
 
 - (void)scanDevice{
+    
+    [[NPBLE_Manager sharedNPBLE_Manager] NPBLE_ScanDeviceWithCompletionHandler:^(NSArray *devices) {
+        
+        self.discoverController.devices = devices;
+    }];
  
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
     
+    [window addSubview:self.coverButton];
     
-
-
+    [window addSubview:self.discoverController.view];
 }
 
 -(void)back{
@@ -240,13 +250,74 @@
    }];
 }
 
+- (void)hideDiscoverControllerView{
+    
+    [self.coverButton removeFromSuperview];
+
+    [self.discoverController.view removeFromSuperview];
+    
+    self.discoverController = nil;
+    
+    [[NPBLE_Manager sharedNPBLE_Manager] clearDiscoverDevices];
+}
+
+- (void)discoverController:(NPDiscoverController *)controller didSelectDevice:(NPBLE_Device *)device{
+  
+    [[NPBLE_Manager sharedNPBLE_Manager] NPBLE_ConnectDevice:device andCompletionHandler:^(NPBLE_Device *device) {
+        
+        NSLog(@"connect device name = %@",device.name);
+    }];
+    
+    [self hideDiscoverControllerView];
+}
+
 #pragma mark - setter && getter
+
+- (NPDiscoverController *)discoverController{
+
+    if (_discoverController == nil) {
+        
+        _discoverController = [[NPDiscoverController alloc] init];
+        
+        _discoverController.view.y = 60;
+        
+        _discoverController.view.width = self.view.width * 0.3;
+        
+        _discoverController.view.height = self.view.height * 0.5;
+        
+        _discoverController.view.x = (self.view.width - _discoverController.view.width) * 0.5;
+        
+        _discoverController.delegate = self;
+    }
+    
+    return _discoverController;
+}
+
+- (UIButton *)coverButton{
+
+    if (_coverButton == nil) {
+        
+        _coverButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        
+        _coverButton.frame = window.bounds;
+        
+        _coverButton.backgroundColor = [UIColor blackColor];
+        
+        _coverButton.alpha = 0.3;
+        
+        [_coverButton addTarget:self action:@selector(hideDiscoverControllerView) forControlEvents:UIControlEventTouchUpInside];
+    }
+  
+    return _coverButton;
+}
 
 -(NSMutableArray *)tilesModulesArray{
     
     if (_tilesModulesArray == nil) {
         
-        self.tilesModulesArray = [NSMutableArray array];
+        _tilesModulesArray = [NSMutableArray array];
     }
     
     return _tilesModulesArray;
@@ -256,7 +327,7 @@
     
     if (_notificationCenter == nil) {
         
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
+        _notificationCenter = [NSNotificationCenter defaultCenter];
     }
     
     return _notificationCenter;
@@ -266,20 +337,11 @@
     
     if (_metroContainerView == nil) {
         
-        self.metroContainerView = [NPMetroContainerView containerViewWithLagreMagrin:5 andSmallMagrin:5 andTopMagrin:5];
+        _metroContainerView = [NPMetroContainerView containerViewWithLagreMagrin:5 andSmallMagrin:5 andTopMagrin:5];
     }
     
     return _metroContainerView;
 }
 
-- (NSNotificationCenter *)notifyCenter{
-
-    if (_notifyCenter == nil) {
-        
-        _notifyCenter = [NSNotificationCenter defaultCenter];
-    }
-  
-    return _notifyCenter;
-}
 
 @end

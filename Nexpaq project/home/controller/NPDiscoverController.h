@@ -8,8 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class NPDiscoverController;
+@class NPBLE_Device;
+
+
+@protocol NPDiscoverControllerDelegate <NSObject>
+
+
+@optional
+
+- (void)discoverController:(NPDiscoverController *)controller didSelectDevice:(NPBLE_Device *)device;
+
+@end
+
 @interface NPDiscoverController : UITableViewController
 
 @property (nonatomic, strong) NSArray *devices;
+
+@property (nonatomic, weak) id<NPDiscoverControllerDelegate> delegate;
 
 @end
