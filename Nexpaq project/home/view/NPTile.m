@@ -27,9 +27,6 @@
     return self;
 }
 
-
-
-
 + (instancetype)tileWithStatusImagePaths:(NSMutableDictionary *)statusImagePaths andIconImagePaths:(NSMutableDictionary *)iconImagePaths andTextAtts:(NSMutableDictionary *)textAtts andTitle:(NSString *)title{
 
     return [[self alloc] initWithStatusImagePaths:statusImagePaths andIconImagePaths:iconImagePaths andTextAtts:textAtts andTitle:title];

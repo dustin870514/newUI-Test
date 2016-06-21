@@ -32,9 +32,7 @@
     UIColor *color = [UIColor colorWithRed:redInteger / 255.0 green:greenInteger /  255.0 blue:blueInteger / 255.0 alpha:1];
     
     self.color = color;
-
 }
-
 
 + (instancetype)textAttWithDict:(NSDictionary *)dict{
 

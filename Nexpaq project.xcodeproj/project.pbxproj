@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17347BB01D17B8E90029ABF6 /* gateways.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17347BAF1D17B8E90029ABF6 /* gateways.txt */; };
+		17347BB61D18EA160029ABF6 /* NPDiscoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17347BB51D18EA160029ABF6 /* NPDiscoverController.m */; };
 		17FB6D7F1D124844009B2482 /* NPMetroContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */; };
 		17FB6D801D124844009B2482 /* NPMetroSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D7E1D124844009B2482 /* NPMetroSubView.m */; };
 		17FB6D831D1248C8009B2482 /* NPTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17FB6D821D1248C8009B2482 /* NPTileView.m */; };
@@ -94,7 +96,6 @@
 		B53BC62C1D11531E00AA25A9 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC61C1D11531E00AA25A9 /* UIView+WebCacheOperation.m */; };
 		B53BC62F1D11557600AA25A9 /* NPTilesModules.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC62E1D11557600AA25A9 /* NPTilesModules.m */; };
 		B53BC6321D1156C500AA25A9 /* NPTilesModulesResults.m in Sources */ = {isa = PBXBuildFile; fileRef = B53BC6311D1156C500AA25A9 /* NPTilesModulesResults.m */; };
-		B54029D01D13FD2700683394 /* gateways.txt in Resources */ = {isa = PBXBuildFile; fileRef = B54029CF1D13FD2700683394 /* gateways.txt */; };
 		B54029D61D1401DF00683394 /* NPGatewayUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B54029D51D1401DF00683394 /* NPGatewayUser.m */; };
 		B54029D91D14020A00683394 /* NPGatewaysModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B54029D81D14020A00683394 /* NPGatewaysModule.m */; };
 		B54029DC1D14032100683394 /* NPGatewayTileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B54029DB1D14032100683394 /* NPGatewayTileModule.m */; };
@@ -119,6 +120,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17347BAF1D17B8E90029ABF6 /* gateways.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gateways.txt; sourceTree = "<group>"; };
+		17347BB41D18EA160029ABF6 /* NPDiscoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPDiscoverController.h; sourceTree = "<group>"; };
+		17347BB51D18EA160029ABF6 /* NPDiscoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPDiscoverController.m; sourceTree = "<group>"; };
 		17FB6D7B1D124844009B2482 /* NPMetroContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroContainerView.h; sourceTree = "<group>"; };
 		17FB6D7C1D124844009B2482 /* NPMetroContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPMetroContainerView.m; sourceTree = "<group>"; };
 		17FB6D7D1D124844009B2482 /* NPMetroSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPMetroSubView.h; sourceTree = "<group>"; };
@@ -300,7 +304,6 @@
 		B53BC6301D1156C500AA25A9 /* NPTilesModulesResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPTilesModulesResults.h; sourceTree = "<group>"; };
 		B53BC6311D1156C500AA25A9 /* NPTilesModulesResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPTilesModulesResults.m; sourceTree = "<group>"; };
 		B540298C1D13936E00683394 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		B54029CF1D13FD2700683394 /* gateways.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gateways.txt; sourceTree = "<group>"; };
 		B54029D41D1401DF00683394 /* NPGatewayUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPGatewayUser.h; sourceTree = "<group>"; };
 		B54029D51D1401DF00683394 /* NPGatewayUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPGatewayUser.m; sourceTree = "<group>"; };
 		B54029D71D14020A00683394 /* NPGatewaysModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPGatewaysModule.h; sourceTree = "<group>"; };
@@ -393,7 +396,7 @@
 		B53BC4EF1D1124C400AA25A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B54029CF1D13FD2700683394 /* gateways.txt */,
+				17347BAF1D17B8E90029ABF6 /* gateways.txt */,
 				B53BC4F01D1124C400AA25A9 /* main.m */,
 				B540298C1D13936E00683394 /* PrefixHeader.pch */,
 			);
@@ -435,6 +438,8 @@
 				B53BC5251D11256F00AA25A9 /* NPNavigationController.m */,
 				B53BC5261D11256F00AA25A9 /* NPRootViewController.h */,
 				B53BC5271D11256F00AA25A9 /* NPRootViewController.m */,
+				17347BB41D18EA160029ABF6 /* NPDiscoverController.h */,
+				17347BB51D18EA160029ABF6 /* NPDiscoverController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -872,9 +877,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53BC4FF1D1124C400AA25A9 /* LaunchScreen.storyboard in Resources */,
+				17347BB01D17B8E90029ABF6 /* gateways.txt in Resources */,
 				B53BC4FC1D1124C400AA25A9 /* Assets.xcassets in Resources */,
 				B53BC5F01D11511000AA25A9 /* Info.plist in Resources */,
-				B54029D01D13FD2700683394 /* gateways.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +908,7 @@
 				B53BC6251D11531E00AA25A9 /* SDWebImagePrefetcher.m in Sources */,
 				B53BC5A91D112C2A00AA25A9 /* NPBLE_CommandString.m in Sources */,
 				B53BC5741D1128A300AA25A9 /* NPUIbutton.m in Sources */,
+				17347BB61D18EA160029ABF6 /* NPDiscoverController.m in Sources */,
 				B53BC5F21D11511000AA25A9 /* MJFoundation.m in Sources */,
 				B53BC5A61D112C2A00AA25A9 /* NPBLE_Parse.m in Sources */,
 				B53BC61E1D11531E00AA25A9 /* NSData+ImageContentType.m in Sources */,

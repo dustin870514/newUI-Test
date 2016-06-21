@@ -12,9 +12,11 @@
 #import "NPMetroSubView.h"
 #import "NPAddTilesTableViewController.h"
 #import "UIBarButtonItem+extention.h"
+#import "UIImage+Not_stretch.h"
 #import "NPHttps_Networking_ForTiles.h"
 #import "NPTilesModules.h"
 #import "NPTileView.h"
+#import "NPTile.h"
 
 #define MODULETILE_NOTIFY_DIDSELECTED @"MODULETILE_NOTIFY_DIDSELECTED"
 
@@ -118,9 +120,15 @@
 
 -(void)setUpNavigationItem{
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(clickLeftBarButtonItem)];
+    UIBarButtonItem *settingButton =  [[UIBarButtonItem alloc] initWithTitle:@"setting" style:  UIBarButtonItemStylePlain target:self action:@selector( clickLeftBarButtonItem)];
+
+    UIBarButtonItem *addTilesButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(clickRightBarButtonItem)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(clickRightBarButtonItem)];
+    UIBarButtonItem *scanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageOrginWithName:@"HomeLeft_Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(scanDevice)];
+    
+    self.navigationItem.leftBarButtonItem = settingButton;
+    
+    self.navigationItem.rightBarButtonItems = @[scanButton,addTilesButton];
 }
 
 -(void)clickLeftBarButtonItem{
@@ -134,10 +142,52 @@
     
     [self.touchMovedView hideDisConnectController];
     
+    [self.metroContainerView clearAllSubbViews];
+    
     self.gateWayDidselected = note.userInfo[USER_GATEWAY_UUID];
     
-    NSLog(@"------------gateWayDidselected.UUID----------%@----------",self.gateWayDidselected);
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"gateways.txt" ofType:nil]];
     
+    NSMutableArray *users = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    NSDictionary *user = users.lastObject;
+    
+    NSArray *gateways = user[@"gateways"];
+    
+    for (NSDictionary *dict in gateways) {
+        
+        if ([dict[@"uuid"] isEqualToString:self.gateWayDidselected]) {
+            
+            NSArray *titles = dict[@"tiles"];
+            
+            for (NSDictionary *dict in titles) {
+                
+                NSString *Id = [NSString stringWithFormat:@"%@",dict[kNPGatewayId]];
+                
+                NSString *tileTemplate = dict[kNPGatewayTemplate];
+                
+                NSString *position = dict[kNPGatewayPosition];
+                
+                NPTileView *tileView = [NPTileView tileViewWithTemplate:[tileTemplate integerValue] andPosition:[position integerValue]];
+                
+                [self.metroContainerView containerViewIncludeSubView:tileView];
+                
+                [NPHttps_Networking_ForTiles downloadTileResourceWithIdUrl:[NSString stringWithFormat:@"%zd/title.txt",Id] andId:Id andSuccess:^(NPTile *tile) {
+                    
+                    tileView.tile = tile;
+                    
+                } andFailure:^(NSError *erro) {
+                    
+                    if (erro) {
+                        
+                        NSLog(@"er = %@",erro);
+                    }
+                    
+                }];
+            }
+        }
+    }
+
 }
 
 -(void)clickRightBarButtonItem{
@@ -148,6 +198,14 @@
     
    [self.navigationController pushViewController:addTilesTableViewController animated:YES];
     
+}
+
+- (void)scanDevice{
+ 
+    
+    
+
+
 }
 
 -(void)back{
@@ -171,10 +229,11 @@
        
    } andFailure:^(NSError *error) {
        
-       
-       
+       if (error) {
+           
+           NSLog(@"er = %@",error);
+       }
    }];
-
 }
 
 -(void)getDeviceUUID:(NSNotification *)userInfo{
